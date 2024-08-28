@@ -5,7 +5,10 @@
     box-sizing: border-box;
 }
 
-:is(h1, h2, h3, h4, h5, h6){
-text-align: center;
-text-decoration: underline;
+h1{
+    text-align: center;
+    color: pink;
+}
+body{
+    background-color:blue;
 }

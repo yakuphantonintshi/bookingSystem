@@ -1,71 +1,18 @@
-import express from 'express'
-import path from 'path'
-import { connection as db} from './config/index.js'
+import { createPool } from "mysql2";
+import 'dotenv/config'
 
-const app = express()
-const port = +process.env.PORT || 4000
-const router = express.Router()
 
-// Middleware
-app.use(router, express.static('./static'), 
-express.json(), 
-express.urlencoded({
-    extended: true
-}))
-
-router.get('^/$|/booking', (req, res) => {
-    res.status(200).sendFile(path.resolve('./static/html/index.html'))
+let connection = createPool({
+    host: process.env.hostDb,
+    user: process.env.userDb,
+    password: process.env.pwdDb,
+    database: process.env.dbName,
+    multipleStatements: true,
+    connectionLimit: 30
 })
-
-// Getting all the users
-router.get('/users', (req, res) => {
-    try {
-        const strQry = `
-        SELECT firstName, lastName, age, emailAdd 
-        FROM Users;
-        `
-        db.query(strQry, (err, results) => {
-            if(err) throw new Error (`Unable to fetch all users`)
-            res.json({
-                status: res.statusCode,
-                results
-            })
-        })
-    }catch (e) {
-        res.json({
-            status: 404,
-            msg: e.message
-        })
-    }
+connection.on('connection', (pool) => {
+    if(!pool) throw new Error('Couldn\'t connect to the database, please try again later')
 })
-
-// Getting a single user
-router.get('/user/:id' , (req,res) => {
-    try{
-        const strQry = `SELECT userID, firstName, lastName, age, emailAdd
-        FROM Users 
-        WHERE userID = ${req.params.id};`
-
-        db.query(strQry, (err, result) => {
-            if (err) throw new Error(' Unable to fetch the user')
-                res.json({
-            status: res.statusCode,
-            result: result[0]
-        })
-        })
-    } catch (e){
-        res.json({
-            status: 404,
-            msg: e.message
-        })
-    }
- })
-router.get('*', (req, res) => {
-    res.json({
-        status: 404,
-        msg: 'Resource not found'
-    })
-})
-app.listen(port, () => {
-    console.log(`Server is running on ${port}`);
-})
+export {
+    connection
+}

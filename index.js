@@ -21,7 +21,7 @@ router.get('^/$|/booking', (req, res) => {
 router.get('/users', (req, res) => {
     try {
         const strQry = `
-        SELECT firstName, lastName, age, emailAdd 
+        SELECT userID, firstName, lastName, email, gender,age, pwd 
         FROM Users;
         `
         db.query(strQry, (err, results) => {
@@ -42,8 +42,8 @@ router.get('/users', (req, res) => {
 // Getting a single user
 router.get('/user/:id' , (req,res) => {
     try{
-        const strQry = `SELECT userID, firstName, lastName, age, emailAdd
-        FROM Users 
+        const strQry = `SELECT userID, firstName, lastName, email, gender,age, pwd 
+        FROM Users
         WHERE userID = ${req.params.id};`
 
         db.query(strQry, (err, result) => {

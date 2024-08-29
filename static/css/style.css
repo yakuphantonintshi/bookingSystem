@@ -5,10 +5,11 @@
     box-sizing: border-box;
 }
 
-h1{
+h2{
     text-align: center;
-    color: pink;
 }
-body{
-    background-color:blue;
-}
+/* body{
+    background-image: url('https://yakuphantonintshi.github.io/myimages/Images/purple.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+} */

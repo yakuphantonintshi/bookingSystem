@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 *,
 *::after,
 *::before {
@@ -26,21 +27,26 @@ img[alt='logo'] {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    /* background-image: url('https://yakuphantonintshi.github.io/myimages/Images/purple.jpg'); */
+    background-image: url('https://w0.peakpx.com/wallpaper/47/692/HD-wallpaper-purple-flower-abstract-background-purple-floral-shine-stars.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
   }
   
   nav li{
-    padding: 30px;
+    padding-inline: 30px;
     color: #9f00bb;
+    font-weight: bolder;
+    font-size: 1.5rem;
   }
-  
-  /* nav a {
-    font-weight: bold;
-    color: #9f00bb;
-  } */
   
   nav a.router-link-exact-active {
     color: #9f00bb;
   }
+  /* .navbar{
+    background-color: #fff;
+  } */
 
   .wrapper {
     display: grid;
@@ -48,12 +54,13 @@ img[alt='logo'] {
 }
 #navBar{
     font-weight: bold;
-    color:#9f00bb;;
+    color:#e9aef4;;
 }
 #navBar:hover{
     text-decoration: underline;
 }
 
 footer{
-    color: #9f00bb;
+    color: white;
+    /* background-color: #fff; */
 }

@@ -1,5 +1,5 @@
 <template>
-    <footer class="container-fluid">
+    <footer class="container">
       <div class="row">
           <p class="lead">Seat Saver &copy;
           <span class="shadow">

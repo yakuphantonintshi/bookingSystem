@@ -2,7 +2,8 @@
 <div class="container">
  <h1> WELCOME TO SEAT SAVER🚐</h1>
  <p>Your journey, Our priority - Travel in comfort and style</p>
- <button @click="LoginPage" type="button" class="btn">GET STARTED</button>
+ <button @click="LoginPage" type="button" class="btn">LOGIN</button>
+ <button @click="SignUpPage" type="button" class="btn">SIGN UP</button>
 </div>
 
 
@@ -15,6 +16,9 @@ export default {
     LoginPage() {
       this.$router.push({ name: 'login' });
     },
+    SignUpPage() {
+      this.$router.push({name: 'register' })
+    }
   },
 };
 </script>
@@ -26,13 +30,16 @@ h1{
   padding-top: 7rem;
   font-size: 5.5rem;
   font-weight: bolder;
+  text-shadow: 3px 3px 4px #9f00bb;
   
 }
 p{
-  font-size: 2.5rem;
-  color: #e181f2;
+  font-size: 2.8rem;
+  /* color: #e181f2; */
+  color: white;
+  text-shadow: 3px 3px 4px #9f00bb;
   padding-top: 7rem;
-  text-shadow: 1px 1px 1px white;
+  /* text-shadow: 1px 1px 1px white; */
 }
 
 .btn{
@@ -42,6 +49,7 @@ p{
   border: 2px solid white;
   color: white;
   margin-top: 8rem;
+  margin-inline: 3rem;
 }
 .btn:hover{
   color: white;

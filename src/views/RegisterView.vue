@@ -1,33 +1,82 @@
 <template>
+       <form @submit.prevent="validatePasswords">
+    <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
     <div class="container-fluid">
         <h1>Sign up!</h1>
         <p>Personal Information</p>
         <label>
-            <input type="text" class="input" name="firstname" placeholder="Enter your firstName">
+            <input type="text" class="input" name="firstname" placeholder="Enter your firstName" required>
         </label> <br>
         <label>
-            <input type="text" class="input" name="lastname" placeholder="Enter your lastname">
+            <input type="text" class="input" name="lastname" placeholder="Enter your lastname" required>
         </label> <br>
         <label>
-            <input type="email" class="input" name="email" placeholder="Enter your email address">
+            <input type="email" class="input" name="email" placeholder="Enter your email address" required>
         </label> <br>
-        <label class="gender">
-            Gender: <br>
-        <button type="button"><input type="radio" name="color"> Male</button>
-        <button type="button"><input type="radio" name="color"> Female</button> <br>  
-    </label>  <br>
-            <label class="date">Date of birth: <br> <input type="date" class="datee"></label>
+
+        <label class="gender">Gender:
+
+        <select id="gender" name="gender" class="dropdown" required>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
+    </label> <br>
+        <label for="dob" class="date">Date of birth: <br>
+            <input v-model="dob" :min="minDate" type="date" class="datee" id="dob" required></label>
+    
+            
 
             <p>Create your password</p>
-            <label><input type="password" class="password" placeholder="New password"></label> <br>
-            <label><input type="password" class="password" placeholder="Confirm password"></label>
-        
-    <br>
-    <button type="button" class="register">Register</button>
+            <input v-model="newPassword" class="inp"  type="password" id="newPassword" name="newPassword" placeholder="New password" required>
+            <input v-model="confirmPassword" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+    <div v-if="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+    <button type="submit" class="register">Register</button>
     </div>
+</form>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      newPassword: '',
+      confirmPassword: '',
+      errorMessage: '',
+    };
+},
+
+  methods: {
+    validatePasswords() {
+      if (this.newPassword !== this.confirmPassword) {
+        this.errorMessage = 'Passwords do not match.';
+      } else {
+        this.errorMessage = '';
+      }
+    },
+  },
+
+}
+</script>
+
+
 <style scoped>
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+.arrow{
+    font-size: 4rem;
+    display: flex;
+    margin-left: 2rem;
+    /* margin-top: 1.5rem; */
+    color: #9f00bb;
+}
 .container-fluid{
     background-color: #40185f;
     width: 600px;
@@ -64,13 +113,27 @@ button{
 }
 .register{
     width: 200px;
+    height: 50px;
+    color: white;
+    background-color: rgb(227, 121, 227);
     margin-bottom: 1.5rem;
+    margin-top: -3.5px;
 }
 h1{
     color:  #e9aef4;
 }
 :is(.gender, .date){
     color: white;
+}
+.gender{
+    padding-top: 2rem;
+}
+
+.inp{
+display: flex;
+margin-left: 9rem;
+width: 300px;
+margin-block: 2rem;
 }
 
 </style>

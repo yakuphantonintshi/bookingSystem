@@ -1,23 +1,19 @@
 <template>
     <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
-<form >
+<form>
     <h4>LOGIN</h4>
 
 <label for="email">Enter your email</label>
 <input type="email" id="email" placeholder="example@gmail.com" required>
 
 <label for="password">Enter your password</label>
-<input type="password" id="password" name="password" required
-         minlength="8" >
-  <small>Password must be at least 8 characters long and contain at least one number, one lowercase letter, and one uppercase letter.</small>
-
+<input type="password" id="password" name="password" required>
 <button type="submit">LOGIN</button>
 <span id="error-message" style="color: red;"></span>
 
 </form>
 
 </template>
-
 
 
 <style scoped>

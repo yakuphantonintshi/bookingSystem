@@ -2,6 +2,7 @@
 <div class="container">
  <h1> WELCOME TO SEAT SAVER🚐</h1>
  <p>Your journey, Our priority - Travel in comfort and style</p>
+ <img src="https://data.textstudio.com/output/sample/animated/3/3/5/7/let-s-go-4-17533.gif" alt="gif" height="300px" width="700px"> <br>
  <button @click="LoginPage" type="button" class="btn">LOGIN</button>
  <button @click="SignUpPage" type="button" class="btn">SIGN UP</button>
 </div>
@@ -35,11 +36,9 @@ h1{
 }
 p{
   font-size: 2.8rem;
-  /* color: #e181f2; */
   color: white;
   text-shadow: 3px 3px 4px #9f00bb;
-  padding-top: 7rem;
-  /* text-shadow: 1px 1px 1px white; */
+  padding-top: 3rem;
 }
 
 .btn{
@@ -48,7 +47,7 @@ p{
   background-color: #9f00bb;
   border: 2px solid white;
   color: white;
-  margin-top: 8rem;
+  /* margin-top: 1rem; */
   margin-inline: 3rem;
 }
 .btn:hover{

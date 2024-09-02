@@ -1,71 +1,95 @@
 <template>
-       <form @submit.prevent="validatePasswords">
-    <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
-    <div class="container-fluid">
+    <form @submit.prevent="validatePasswords">
+      <span class="arrow">
+        <a href="/"><i class="bi bi-arrow-left-circle"></i></a>
+      </span>
+      <div class="container-fluid">
         <h1>Sign up!</h1>
         <p>Personal Information</p>
         <label>
-            <input type="text" class="input" name="firstname" placeholder="Enter your firstName" required>
+          <input type="text" class="input" v-model="firstname" name="firstname" placeholder="Enter your firstName" required>
         </label> <br>
         <label>
-            <input type="text" class="input" name="lastname" placeholder="Enter your lastname" required>
+          <input type="text" class="input" v-model="lastname" name="lastname" placeholder="Enter your lastname" required>
         </label> <br>
         <label>
-            <input type="email" class="input" name="email" placeholder="Enter your email address" required>
+          <input type="email" class="input" v-model="email" name="email" placeholder="Enter your email address" required>
         </label> <br>
-
+  
         <label class="gender">Gender:
-
-        <select id="gender" name="gender" class="dropdown" required>
+          <select id="gender" v-model="gender" name="gender" class="dropdown" required>
             <option value="" disabled selected>Select your gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
             <option value="prefer_not_to_say">Prefer not to say</option>
-        </select>
-    </label> <br>
+          </select>
+        </label> <br>
+  
         <label for="dob" class="date">Date of birth: <br>
-            <input v-model="dob" :min="minDate" type="date" class="datee" id="dob" required></label>
-    
-            
-
-            <p>Create your password</p>
-            <input v-model="newPassword" class="inp"  type="password" id="newPassword" name="newPassword" placeholder="New password" required>
-            <input v-model="confirmPassword" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
-    <div v-if="errorMessage" class="error">
-        {{ errorMessage }}
+          <input v-model="dob" :min="minDate" type="date" class="datee" id="dob" required>
+        </label>
+  
+        <p>Create your password</p>
+        <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required 
+        minlength="8" >
+        <input v-model="confirmPassword" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required minlength="8">
+  
+        <div v-if="errorMessage" class="error">
+          {{ errorMessage }}
+        </div>
+  
+        <button type="submit" class="register">Register</button>
       </div>
-    <button type="submit" class="register">Register</button>
-    </div>
-</form>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      newPassword: '',
-      confirmPassword: '',
-      errorMessage: '',
-    };
-},
-
-  methods: {
-    validatePasswords() {
-      if (this.newPassword !== this.confirmPassword) {
-        this.errorMessage = 'Passwords do not match.';
-      } else {
-        this.errorMessage = '';
-      }
+    </form>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        firstname: '',
+        lastname: '',
+        email: '',
+        gender: '',
+        dob: '',
+        newPassword: '',
+        confirmPassword: '',
+        errorMessage: '',
+      };
     },
-  },
-
-}
-</script>
+    computed: {
+      minDate() {
+        const today = new Date();
+        const minYear = today.getFullYear() - 16;
+        return `${minYear}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      },
+    },
+    methods: {
+      validatePasswords() {
+        if (this.newPassword !== this.confirmPassword) {
+          this.errorMessage = 'Passwords do not match.';
+        } else if (!this.firstname || !this.lastname || !this.email || !this.gender || !this.dob) {
+          this.errorMessage = 'Please fill in all required fields.';
+        } else {
+          this.errorMessage = '';
+          this.LoginPage();
+        }
+      },
+      LoginPage() {
+        this.$router.push({ name: 'about' });
+      },
+    },
+  };
+  </script>
+  
 
 
 <style scoped>
-
+.dropdown{
+    width: 250px;
+    height: 35px;
+}
 .error {
   color: red;
   font-size: 14px;

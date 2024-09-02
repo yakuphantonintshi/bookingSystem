@@ -1,5 +1,5 @@
 <template>
-    <footer class="container">
+    <footer class="container-fluid">
       <div class="row">
           <p class="lead">Seat Saver &copy;
           <span class="shadow">
@@ -22,3 +22,16 @@ export default {
 
 }
 </script>
+
+<style scoped>
+footer{
+    border-top: 4px solid #9f00bb;
+    text-align: center;
+    margin-top: 2rem;
+}
+.lead{
+    color: white;
+    font-weight: 700;
+}
+
+</style>

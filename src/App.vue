@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <NavBar v-if="showNavbar"/>
+    <NavBar :style="{ backgroundColor: currentNavbarColor }" v-if="showNavbar"/>
     <main>
       <router-view/>
     </main>
@@ -17,9 +17,12 @@ export default {
     Footer
   },
   computed: {
+    currentNavbarColor() {
+      return this.$route.meta.navbarColor || '#333'; // Default color if not specified
+    },
     showNavbar() {
       // return this.$route.name !== 'home';
-      const visibleNavbarRoutes = ['/register'];
+      const visibleNavbarRoutes = ['/about'];
       return visibleNavbarRoutes.includes(this.$route.path);
     },
   },
@@ -28,5 +31,6 @@ export default {
 </script>
 
 <style src="@/assets/css/style.css">
+
 
 </style>

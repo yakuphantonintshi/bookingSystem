@@ -1,13 +1,13 @@
 <template>
     <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
-<form>
+<form @submit.prevent="handleSubmit">
     <h4>LOGIN</h4>
 
 <label for="email">Enter your email</label>
-<input type="email" id="email" placeholder="example@gmail.com" required>
+<input type="email" id="email" v-model="email" placeholder="example@gmail.com" required>
 
 <label for="password">Enter your password</label>
-<input type="password" id="password" name="password" required>
+<input type="password" id="password" v-model="password" name="password" required>
 <button type="submit">LOGIN</button>
 <span id="error-message" style="color: red;"></span>
 
@@ -15,15 +15,37 @@
 
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    handleSubmit() {
+      this.$store.dispatch('login', {
+        email: this.email,
+        pwd: this.password,
+      })
+    },
+  },
+}
+</script>
+
 
 <style scoped>
 
-.arrow{
+.bi{
     font-size: 4rem;
     display: flex;
     margin-left: 2rem;
     margin-top: 1.5rem;
-    color: #be2fd7;
+   color: #7ddff1;
+}
+a{
+  color: transparent;
 }
 
 form{
@@ -34,8 +56,8 @@ form{
     align-items: center;
     margin-left: 30rem;
     margin-top: 1rem;
-    background-color: #40185f;
-    border: 3px solid #9f00bb;
+    background-color:#001f31;
+    border: 3px solid #7ddff1;
 }
 input{
     width: 300px;
@@ -47,7 +69,6 @@ label{
     font-size: 1rem;
     color: #f6f0f7;
     padding-block: 2.5rem;
-    text-align: start;
 }
 h4{
     color: white;
@@ -59,17 +80,10 @@ button{
     margin-top: 3rem;
     width: 300px;
     height: 50px;
-    background-color: #9f00bb;
+    background-color: #001f31;
+    border: 2px solid #7ddff1;
     color: white;
     font-size: 1.3rem;
 }
-a{
-    color: #9f00bb;
-}
-p{
-    color: white;
-    padding-top: 2rem;
-}
-
 
 </style>

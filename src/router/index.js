@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import AboutView from '@/views/AboutView.vue'
+import OfficesView from '../views/OfficesView.vue'
 
 const routes = [
   {
@@ -24,7 +25,13 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView,
-    meta: { navbarColor: '#02023d'}
+    meta: { navbarColor: '#001f31'}
+  },
+  {
+    path: '/offices',
+    name: 'offices',
+    component: OfficesView,
+    meta: { navbarColor: '#001f31'}
   }
 ]
 

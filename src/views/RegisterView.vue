@@ -82,6 +82,7 @@
     },
   };
   </script>
+
   
 
 
@@ -94,22 +95,25 @@
   color: red;
   font-size: 14px;
 }
-.arrow{
+.bi{
     font-size: 4rem;
     display: flex;
     margin-left: 2rem;
-    /* margin-top: 1.5rem; */
-    color: #9f00bb;
+    margin-top: 1.5rem;
+    color: #7ddff1;
+}
+a{
+  color: transparent;
 }
 .container-fluid{
-    background-color: #40185f;
+    background-color: #001f31;
     width: 600px;
 }
 p{
     font-size: 1.5rem;
     margin-top: 2rem;
     text-decoration: underline;
-    color: #e9aef4;
+    color: #7ddff1;
 }
 .input{
     width: 300px;
@@ -121,7 +125,7 @@ button{
     padding-inline: 5px;
     width: 100px;
     background-color: transparent;
-    border: 2px solid #9f00bb;
+    border: 2px solid #7ddff1;
 }
 .date{
     margin-top: 2rem;
@@ -139,12 +143,12 @@ button{
     width: 200px;
     height: 50px;
     color: white;
-    background-color: rgb(227, 121, 227);
+    background-color: transparent;
     margin-bottom: 1.5rem;
     margin-top: -3.5px;
 }
 h1{
-    color:  #e9aef4;
+    color:  #7ddff1;
 }
 :is(.gender, .date){
     color: white;

@@ -49,7 +49,7 @@ span{
   margin-left: 1rem;
 }
 h1{
-  text-shadow: 3px 3px 5px #9f00bb;
+  text-shadow: 3px 3px 5px #7ddff1;
   color: white;
   padding-bottom: 2rem;
   font-weight: bold;
@@ -60,13 +60,13 @@ h1{
   color: white;
   font-weight: bolder;
   /* background-color: #e16ef6; */
-  text-shadow: 4px 1px 2px #9f00bb;
+  text-shadow: 4px 1px 2px #7ddff1;
 }
 img{
-  border: 4px solid #9f00bb;
+  border: 4px solid #7ddff1;
 }
 .container-fluid{
-  background-color: rgb(2, 2, 61);
+  background-color: #001f31;
 }
 nav{
   background-color: white;
@@ -84,6 +84,11 @@ button{
   margin-bottom: 3rem;
   border-radius: 6px;
   color: white;
-  background-color: #9f00bb;
+  background-color: transparent;
+  border: 3px solid #7ddff1;
 }
+button:hover{
+  background-color: #7ddff1;
+}
+
 </style>

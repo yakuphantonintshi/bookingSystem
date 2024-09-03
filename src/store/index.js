@@ -9,7 +9,11 @@ const apiURL = 'http://localhost:3001/'
 
 export default createStore({
   state: {
-    users: null
+    users: null,
+    username: '',
+      password: '',
+      token: null,
+      eastern: []
   },
   getters: {
   },
@@ -17,6 +21,9 @@ export default createStore({
     setUsers(state, value) {
       state.users = value
     },
+    setEastern(state, value) {
+      state.eastern = value
+    }
   },
   actions: {
     async fetchUsers(context) {
@@ -27,6 +34,26 @@ export default createStore({
           context.commit('setUsers', results)
         } else {
           toast.error(`We are not able to fetch the users`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchEastern(context) {
+      try {
+        const response = await axios.get(`${apiURL}eastern`)
+        
+        const results = response.data
+      if (results) {
+          context.commit('setEastern', results)
+        } else {
+          toast.error(`Failed to fetch Eastern Cape offices`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })

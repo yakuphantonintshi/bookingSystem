@@ -18,11 +18,11 @@ export default {
   },
   computed: {
     currentNavbarColor() {
-      return this.$route.meta.navbarColor || '#333'; // Default color if not specified
+      return this.$route.meta.navbarColor || '#333';
     },
     showNavbar() {
       // return this.$route.name !== 'home';
-      const visibleNavbarRoutes = ['/about'];
+      const visibleNavbarRoutes = ['/about', '/offices'];
       return visibleNavbarRoutes.includes(this.$route.path);
     },
   },

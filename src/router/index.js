@@ -5,6 +5,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import AboutView from '@/views/AboutView.vue'
 import OfficesView from '../views/OfficesView.vue'
 import TicketView from '../views/TicketView.vue'
+import FAQView from '@/views/FAQView.vue'
 
 const routes = [
   {
@@ -38,6 +39,12 @@ const routes = [
     path: '/tickets',
     name: 'tickets',
     component: TicketView,
+    meta: { navbarColor: '#001f31'}
+  },
+  {
+    path: '/faq',
+    name: 'questions',
+    component: FAQView,
     meta: { navbarColor: '#001f31'}
   }
 ]

@@ -13,7 +13,9 @@ export default createStore({
     username: '',
       password: '',
       token: null,
-      eastern: []
+      eastern: [],
+      options: [],
+      selectedOption:null
   },
   getters: {
   },
@@ -23,6 +25,9 @@ export default createStore({
     },
     setEastern(state, value) {
       state.eastern = value
+    },
+    setDeparture(state, value) {
+      state.departure = value
     }
   },
   actions: {
@@ -34,6 +39,25 @@ export default createStore({
           context.commit('setUsers', results)
         } else {
           toast.error(`We are not able to fetch the users`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchDeparture(context) {
+      try {
+        const response = await axios.get(`${apiURL}departure/`)
+        const results = response.data
+        if (results) {
+          context.commit('setDeparture', results)
+        } else {
+          toast.error('Cannot fetch the cities', {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })

@@ -27,16 +27,11 @@
         </label> <br>
   
         <label for="age" class="age">Age: <br>
-          <input type="number" v-model="payload.age" class="age" id="age" required>
-        </label>
-
-        <label for="dob" class="date">Date of birth: <br>
-          <input type="date" class="datee" id="dob" required>
+          <input type="number" v-model="payload.age" class="ageInp" id="age" required>
         </label>
   
         <p>Create your password</p>
-        <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required 
-        minlength="8" >
+        <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required>
         <input v-model="payload.pwd" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required minlength="8">
   
         <div v-if="errorMessage" class="error">
@@ -44,6 +39,7 @@
         </div>
   
         <button type="button" class="register" @click="register()">Register</button>
+        <button @click="AboutPage" type="button">move forward</button>
       </div>
     </form>
   </template>
@@ -54,33 +50,21 @@ import store from '@/store';
   export default {
     data() {
       return {
-        firstname: '',
-        lastname: '',
-        email: '',
-        gender: '',
-        dob: '',
-        newPassword: '',
-        confirmPassword: '',
-        errorMessage: '',
-
-        payload : {
+          payload : {
           firstName: "",
           lastName: "",
           email: "",
           gender: "",
           age: 0,
-          pwd: ""
+          pwd: "",
+          errorMessage: ''
       }
       };
     },
-    computed: {
-      minDate() {
-        const today = new Date();
-        const minYear = today.getFullYear() - 16;
-        return `${minYear}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-      },
-    },
     methods: {
+    AboutPage() {
+      this.$router.push({ name: 'about' });
+    },
       validatePasswords() {
         if (this.newPassword !== this.confirmPassword) {
           this.errorMessage = 'Passwords do not match.';
@@ -88,7 +72,6 @@ import store from '@/store';
           this.errorMessage = 'Please fill in all required fields.';
         } else {
           this.errorMessage = '';
-          // this.LoginPage();
 
         }
       },
@@ -181,11 +164,14 @@ button{
 h1{
     color:  #7ddff1;
 }
-:is(.gender, .date){
+:is(.gender, .date, .age){
     color: white;
 }
 .gender{
     padding-top: 2rem;
+}
+.age{
+  padding-top: 2rem;
 }
 
 .inp{
@@ -193,6 +179,10 @@ display: flex;
 margin-left: 9rem;
 width: 300px;
 margin-block: 2rem;
+}
+.ageInp{
+  width: 300px;
+  height: 2rem;
 }
 
 </style>

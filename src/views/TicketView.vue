@@ -15,7 +15,7 @@
             <option value="male">cape town</option>
           </select>
 
-          <input type="date">
+          <input type="date" class="date">
 
           <select id="people" name="people" class="dropdown" required>
             <option value="" disabled selected ></option>

@@ -31,7 +31,7 @@ fetchUser(req, res) {
                 WHERE userID = ${req.params.id};`
     
         db.query(strQry, (err, result) => {
-          if (err) throw new Error(" Unable to fetch the user");
+          if (err) throw new Error(" Unable to fetch the user☹️");
           res.json({
             status: res.statusCode,
             result: result[0],

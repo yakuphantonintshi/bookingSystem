@@ -1,17 +1,27 @@
 import { userRouter, express } from "./Controller/UserController.js";
 import { freestateRouter, gautengRouter, KznRouter, northenRouter, officeRouter, westernRouter } from "./Controller/OfficeController.js";
 import path from "path";
-
+import cors from 'cors'
 
 // Create an express app
 const app = express();
 const port = +process.env.PORT || 4000;
 
+
 // Middleware
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next()
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "*");
+    res.header("Access-Control-Request-Methods", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Expose-Headers", "Authorization");
+    next()
 })
+
+app.use(cors())
+
+
 app.use('/Users', userRouter )
 app.use('/eastern', officeRouter )
 app.use('/freestate', freestateRouter )

@@ -65,6 +65,28 @@ export default createStore({
         })
       }
     },
+    async register(context, payload){
+      try {
+        const { token, msg } = await (await axios.post(`${apiURL}users/register`, payload)).data
+        console.log(token);
+        if (token) {
+          context.dispatch('fetchUsers')
+          toast.success(`New user has been added. Thank you🤓`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+
   },
   modules: {
   }

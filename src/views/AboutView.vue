@@ -11,7 +11,7 @@
 <p>Since 2020, SEAT SAVER has been dedicated to providing passengers with a full luxury travel experience. We connect cities and families, giving you the chance to visit your loved ones across South Africa with ease and comfort.
 
 Our luxury coaches are designed to be both safe and affordable, ensuring you travel in style without breaking the bank. At SEAT SAVER, we strive to deliver premium service at affordable prices, making your journey as enjoyable as the destination.</p>
-<button type="button">Book your ticket <span><i class="bi bi-arrow-right-circle-fill"></i></span></button>
+<button @click="TicketPage" type="button">Book your ticket <span><i class="bi bi-arrow-right-circle-fill"></i></span></button>
     </div>
   </div>
 </div>
@@ -20,6 +20,11 @@ Our luxury coaches are designed to be both safe and affordable, ensuring you tra
 <script>
 export default {
   name: 'AboutView',
+  methods: {
+    TicketPage() {
+      this.$router.push({ name: 'tickets' });
+    },
+  }
 };
 </script>
 

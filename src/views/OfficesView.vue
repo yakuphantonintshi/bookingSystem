@@ -6,23 +6,14 @@
 
 
 <div class="content">
-    <div class="dropdown" v-if="eastern?.length">
-        <div v-for="place in eastern" :key="place.stationName">
+
+  <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     EASTERN CAPE OFFICES
   </button>
   <ul class="dropdown-menu">
-  {{ place.stationName}}
-  {{ place.address }}
-  {{ place.email }}
   </ul>
 </div>
-</div>
-<div v-else class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
-    </div>
-</div>
-
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     WESTERN CAPE OFFICES
@@ -65,8 +56,14 @@
 </template>
 
 <script>
+import CardComp from '@/components/CardComp.vue'
+import SpinnerComp from '@/components/SpinnerComp.vue'
 
  export default {
+  components: {
+    CardComp,
+    SpinnerComp
+  },
       computed: {
           eastern() {
               return this.$store.state.eastern

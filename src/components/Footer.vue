@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
 a{
-    margin-inline: 1rem;
+    margin-inline: .5rem;
     font-size: 1.3rem;
     margin-top: -2rem;
     color: #7ddff1;
@@ -37,9 +37,8 @@ a:hover{
     font-size: 1.4rem;
 }
 footer{
-    border-top: 4px solid #7ddff1;
+    border-top: 2px solid #7ddff1;
     text-align: center;
-    margin-top: 2rem;
 }
 .lead{
     color: #7ddff1;

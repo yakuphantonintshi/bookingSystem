@@ -3,9 +3,10 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import AboutView from '@/views/AboutView.vue'
-import OfficesView from '../views/OfficesView.vue'
+import OfficesView from '@/views/OfficesView.vue'
 import TicketView from '../views/TicketView.vue'
 import FAQView from '@/views/FAQView.vue'
+import ContactView from '@/views/ContactView.vue'
 
 const routes = [
   {
@@ -45,6 +46,13 @@ const routes = [
     path: '/faq',
     name: 'questions',
     component: FAQView,
+    meta: { navbarColor: '#001f31'}
+  },
+  {
+
+    path: '/contact',
+    name: 'contact',
+    component: ContactView,
     meta: { navbarColor: '#001f31'}
   }
 ]

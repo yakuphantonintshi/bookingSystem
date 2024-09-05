@@ -14,8 +14,7 @@ export default createStore({
       password: '',
       token: null,
       eastern: [],
-      options: [],
-      selectedOption:null
+      freestate: []
   },
   getters: {
   },
@@ -23,8 +22,11 @@ export default createStore({
     setUsers(state, value) {
       state.users = value
     },
-    setEastern(state, value) {
-      state.eastern = value
+    setEastern(state, payload) {
+      state.eastern = payload
+    },
+    setFreestate(state, payload) {
+      state.freestate = payload
     },
     setDeparture(state, value) {
       state.departure = value
@@ -69,26 +71,6 @@ export default createStore({
         })
       }
     },
-    async fetchEastern(context) {
-      try {
-        const response = await axios.get(`${apiURL}eastern`)
-        
-        const results = response.data
-      if (results) {
-          context.commit('setEastern', results)
-        } else {
-          toast.error(`Failed to fetch Eastern Cape offices`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER
-          })
-        }
-      } catch (e) {
-        toast.error(`${e.message}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
-      }
-    },
     async register(context, payload){
       try {
         const { token, msg } = await (await axios.post(`${apiURL}users/register`, payload)).data
@@ -109,7 +91,47 @@ export default createStore({
         console.log(error);
         
       }
-    }
+    },
+    async fetchEastern(context) {
+      try {
+        const response = await axios.get(`${apiURL}eastern/`)
+        const {results} = response.data
+        console.log(results.results)
+        if (results) {
+          context.commit('setEastern', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchFreestate(context) {
+      try {
+        const response = await axios.get(`${apiURL}freestate/`)
+        const {results} = response.data
+        console.log(results.results)
+        if (results) {
+          context.commit('setFreestate', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
 
   },
   modules: {

@@ -4,7 +4,7 @@
   <h1 class="fade-in"> {{ firstName }} WELCOME TO SEAT SAVER</h1>
   <div class="row">
     <div class="col">
-        <img src="https://d3rh8m1rlgcp00.cloudfront.net/wp-content/uploads/2023/04/Busbody-Banner.jpeg" class="slide-in" alt="picture" width="700px" height="500px">
+        <img src="https://d3rh8m1rlgcp00.cloudfront.net/wp-content/uploads/2023/04/Busbody-Banner.jpeg" class="slide-in" alt="picture" width="650px" height="500px">
     </div>
     <div class="col">
 <p class="paragraph">Experience Full Luxury Bus Travel with SEAT SAVER</p>
@@ -69,6 +69,7 @@ h1{
 }
 img{
   border: 4px solid #7ddff1;
+  box-shadow: 3px 3px 20px #7ddff1;
 }
 .container-fluid{
   background-color: #001f31;
@@ -83,9 +84,9 @@ p{
 button{
   width: 190px;
   height: 55px;
-  margin-top: 2rem;
+  margin-top: .9rem;
   margin-left: 28rem;
-  margin-top: 4.5rem;
+  /* margin-top: 4.5rem; */
   margin-bottom: 3rem;
   border-radius: 6px;
   color: white;

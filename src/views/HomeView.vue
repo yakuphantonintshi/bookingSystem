@@ -47,7 +47,7 @@ p{
   background-color: transparent;  
   border: 2px solid white;
   color: white;
-  /* margin-top: 1rem; */
+  margin-top: -4rem;
   margin-inline: 3rem;
 }
 .btn:hover{

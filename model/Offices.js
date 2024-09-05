@@ -4,11 +4,12 @@ class Offices {
     fetchEastern(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT *
              FROM eastern;
             `;
         db.query(strQry, (err, results) => {
-          if (err) throw new Error(`Unable to fetch the office's information`);
+          if (err) throw new Error(`Unable to fetch the office's information😒`);
+          console.error("Error fetching office information:", err);
           res.json({
             status: res.statusCode,
             results,
@@ -24,10 +25,11 @@ class Offices {
     fetchFreestate(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT stationID, stationURL, stationName, address, email
              FROM freestate;
             `;
         db.query(strQry, (err, results) => {
+          
           if (err) throw new Error(`Unable to fetch the office's information`);
           res.json({
             status: res.statusCode,
@@ -44,7 +46,7 @@ class Offices {
     fetchGauteng(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT *
              FROM gauteng;
             `;
         db.query(strQry, (err, results) => {
@@ -64,7 +66,7 @@ class Offices {
     fetchKzn(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT *
              FROM kzn;
             `;
         db.query(strQry, (err, results) => {
@@ -84,7 +86,7 @@ class Offices {
     fetchNorthern(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT *
              FROM northern;
             `;
         db.query(strQry, (err, results) => {
@@ -104,7 +106,7 @@ class Offices {
     fetchWestern(req, res) {
       try {
         const strQry = `
-            SELECT stationName, address, email
+            SELECT *
              FROM western;
             `;
         db.query(strQry, (err, results) => {

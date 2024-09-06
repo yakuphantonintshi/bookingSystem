@@ -1,5 +1,5 @@
 <template>
-    <div class="questions vh-90">
+    <div class="questions vh-100">
         <h1>FREQUENTLY ASKED QUESTIONS</h1>
 
         <h3>Booking, rebooking and cancellation</h3>
@@ -131,13 +131,13 @@ h3{
     background-color: #001f31;
 }
 .btn{
-    background-color: #7ddff1;
+    background-color: #001f31;
     margin-inline: 2rem;
-    border: 2px solid #001f31;
+    border: 2px solid #7ddff1;
 }
 .btn:hover{
-    background-color: #001f31;
-    color: #7ddff1;
+    background-color: #7ddff1;
+    color: #001f31;
 }
 h3{
     padding-top: 2rem;

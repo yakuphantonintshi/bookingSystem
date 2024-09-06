@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid vh-100">
 
-  <h1 class="fade-in"> {{ firstName }} WELCOME TO SEAT SAVER</h1>
+  <h1 class="fade-in">WELCOME TO SEAT SAVER</h1>
   <div class="row">
     <div class="col">
         <img src="https://d3rh8m1rlgcp00.cloudfront.net/wp-content/uploads/2023/04/Busbody-Banner.jpeg" class="slide-in" alt="picture" width="650px" height="500px">

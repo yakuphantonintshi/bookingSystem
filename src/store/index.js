@@ -13,8 +13,14 @@ export default createStore({
     username: '',
       password: '',
       token: null,
-      eastern: [],
-      freestate: []
+      eastern: null,
+      western: null,
+      kzn: null,
+      freestate: null,
+      northern: null,
+      gauteng: null,
+      departure: null,
+      travelling: null
   },
   getters: {
   },
@@ -25,11 +31,26 @@ export default createStore({
     setEastern(state, payload) {
       state.eastern = payload
     },
+    setWestern(state, payload) {
+      state.western = payload
+    },
+    setKzn(state, payload) {
+      state.kzn = payload
+    },
     setFreestate(state, payload) {
       state.freestate = payload
     },
+    setNorthern(state, payload) {
+      state.northern = payload
+    },
+    setGauteng(state, payload) {
+      state.gauteng = payload
+    },
     setDeparture(state, value) {
       state.departure = value
+    },
+    setTravelling(state, value) {
+      state.travelling = value
     }
   },
   actions: {
@@ -56,8 +77,29 @@ export default createStore({
       try {
         const response = await axios.get(`${apiURL}departure/`)
         const results = response.data
+        
         if (results) {
-          context.commit('setDeparture', results)
+          context.commit('setDeparture', results.results)
+        } else {
+          toast.error('Cannot fetch the cities', {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchTravelling(context) {
+      try {
+        const response = await axios.get(`${apiURL}travelling/`)
+        const results = response.data
+        
+        if (results) {
+          context.commit('setTravelling', results.results)
         } else {
           toast.error('Cannot fetch the cities', {
             autoClose: 2000,
@@ -112,6 +154,44 @@ export default createStore({
         })
       }
     },
+    async fetchWestern(context) {
+      try {
+        const response = await axios.get(`${apiURL}western/`)
+        const {results} = response.data
+        if (results) {
+          context.commit('setWestern', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchKzn(context) {
+      try {
+        const response = await axios.get(`${apiURL}kzn/`)
+        const {results} = response.data
+        if (results) {
+          context.commit('setKzn', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
     async fetchFreestate(context) {
       try {
         const response = await axios.get(`${apiURL}freestate/`)
@@ -119,6 +199,45 @@ export default createStore({
         console.log(results.results)
         if (results) {
           context.commit('setFreestate', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchNorthern(context) {
+      try {
+        const response = await axios.get(`${apiURL}northern/`)
+        const {results} = response.data
+        console.log(results.results)
+        if (results) {
+          context.commit('setNorthern', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchGauteng(context) {
+      try {
+        const response = await axios.get(`${apiURL}gauteng/`)
+        const {results} = response.data
+        if (results) {
+          context.commit('setGauteng', results)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,

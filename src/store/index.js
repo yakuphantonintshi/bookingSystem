@@ -1,8 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
+import { useCookies } from 'vue3-cookies'
 import 'vue3-toastify/dist/index.css'
+import { applyToken } from '@/service/AuthenticateUser.js'
+import router from '@/router'
+const {cookies} = useCookies()
 
+applyToken(cookies.get('legitUser')?.token)
 
 const apiURL = 'http://localhost:3001/'
 
@@ -10,7 +15,7 @@ const apiURL = 'http://localhost:3001/'
 export default createStore({
   state: {
     users: null,
-    username: '',
+    user: null,
       password: '',
       token: null,
       eastern: null,
@@ -51,6 +56,9 @@ export default createStore({
     },
     setTravelling(state, value) {
       state.travelling = value
+    },
+    setUser(state, value){
+      state.travelling = value
     }
   },
   actions: {
@@ -58,8 +66,9 @@ export default createStore({
       try {
         const response = await axios.get(`${apiURL}users`)
         const results = response.data
+        
        if (results) {
-          context.commit('setUsers', results)
+          context.commit('setUsers', results.results)
         } else {
           toast.error(`We are not able to fetch the users`, {
             autoClose: 2000,
@@ -123,6 +132,30 @@ export default createStore({
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+    },
+    async login(context, payload){
+      try {
+        const { token, msg, results } = await (await axios.post(`${apiURL}users/login`, payload)).data
+        if (token) {
+          context.commit('setUser', results)
+          toast.success(`You are now logged in, Arigato🤓`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+          cookies.set('legitUser', {msg, token, results})
+          applyToken(token)
+          router.push({ name : 'tickets' })
+
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -251,6 +284,35 @@ export default createStore({
         })
       }
     },
+    async deleteUser({commit}, {id}){
+      const res = await axios({
+        method: "DELETE",
+        url: `${apiURL}users/${id}`,
+        
+    })
+    console.log(res.data)
+        commit('setUsers',res.data)
+  },
+  async editUser({commit}, {userID, firstName, lastName, age, gender, userRole, email, number}){
+    // console.log(id, first_name, last_name, user_age, gender, user_role, email_add, user_pass, user_profile)
+    const res = await axios({
+      method: "PATCH",
+      data: {
+        userID,
+        firstname: firstName,
+        lastname: lastName,
+        age: age,
+        gender,
+        role: userRole,
+        email: email,
+        number: number
+      },
+      withCredentials: true,
+      url: `${apiURL}users/${userID}`,
+    })
+    console.log(res.data)
+    commit('setUsers',res.data)
+  },
 
   },
   modules: {

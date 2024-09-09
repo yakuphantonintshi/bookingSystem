@@ -7,6 +7,8 @@ import OfficesView from '@/views/OfficesView.vue'
 import TicketView from '../views/TicketView.vue'
 import FAQView from '@/views/FAQView.vue'
 import ContactView from '@/views/ContactView.vue'
+import AdminLogin from '@/views/AdminLogin.vue'
+import AdminView from '@/views/AdminView.vue'
 
 const routes = [
   {
@@ -53,6 +55,20 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView,
+    meta: { navbarColor: '#001f31'}
+  },
+  {
+
+    path: '/admin',
+    name: 'admin',
+    component: AdminLogin,
+    meta: { navbarColor: '#001f31'}
+  },
+  {
+
+    path: '/adminView',
+    name: 'adminView',
+    component: AdminView,
     meta: { navbarColor: '#001f31'}
   }
 ]

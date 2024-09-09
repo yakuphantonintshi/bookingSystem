@@ -18,6 +18,15 @@ img[alt='logo'] {
     object-fit: cover;
     object-position: center;
 }
+img[alt='icon'] {
+  width: 6rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 2px 2px 5px#7ddff1;
+}
 
 
 

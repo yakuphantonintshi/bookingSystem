@@ -1,8 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
+import { useCookies } from 'vue3-cookies'
 import 'vue3-toastify/dist/index.css'
+import { applyToken } from '@/service/AuthenticateUser.js'
+import router from '@/router'
+const {cookies} = useCookies()
 
+applyToken(cookies.get('legitUser')?.token)
 
 const apiURL = 'http://localhost:3001/'
 
@@ -10,7 +15,7 @@ const apiURL = 'http://localhost:3001/'
 export default createStore({
   state: {
     users: null,
-    username: '',
+    user: null,
       password: '',
       token: null,
       eastern: null,
@@ -20,11 +25,33 @@ export default createStore({
       northern: null,
       gauteng: null,
       departure: null,
-      travelling: null
+      travelling: null,
+      // new ones
+      selectedDeparture: null,
+    selectedTravelling: null,
+    numberOfPeople: 1,
+    selectedDate: null,
+    departureTime: null,
+    returningDate: null,
+    distance: 0,
+    priceInZAR: 0,
+    arrivalTime: null,
+    arrivalDate: null,
+    isResultsDiplayed: false
   },
-  getters: {
-  },
+  getters:  {
+      bookingData: state => state,
+      isResultsDiplayed: state => state.isResultsDiplayed
+    },
+  
   mutations: {
+    updateBooking(state, bookingData) {
+      Object.assign(state, bookingData);
+    },
+    displayResults(state, value) {
+      state.isResultsDiplayed = value;
+    },
+  // hygjhkiljo
     setUsers(state, value) {
       state.users = value
     },
@@ -51,15 +78,23 @@ export default createStore({
     },
     setTravelling(state, value) {
       state.travelling = value
+    },
+    setUser(state, value){
+      state.travelling = value
     }
   },
   actions: {
+    confirmBooking({ commit }, bookingData) {
+      commit('updateBooking', bookingData);
+      commit('displayResults', true);
+    },
     async fetchUsers(context) {
       try {
         const response = await axios.get(`${apiURL}users`)
         const results = response.data
+        
        if (results) {
-          context.commit('setUsers', results)
+          context.commit('setUsers', results.results)
         } else {
           toast.error(`We are not able to fetch the users`, {
             autoClose: 2000,
@@ -123,6 +158,30 @@ export default createStore({
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+    },
+    async login(context, payload){
+      try {
+        const { token, msg, results } = await (await axios.post(`${apiURL}users/login`, payload)).data
+        if (token) {
+          context.commit('setUser', results)
+          toast.success(`You are now logged in, Arigato🤓`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+          cookies.set('legitUser', {msg, token, results})
+          applyToken(token)
+          router.push({ name : 'tickets' })
+
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -251,6 +310,38 @@ export default createStore({
         })
       }
     },
+    async deleteUser({commit}, {id}){
+      const res = await axios({
+        method: "DELETE",
+        url: `${apiURL}users/${id}`,
+        
+    })
+    console.log(res.data)
+        commit('setUsers',res.data)
+  },
+  // async editUser({ commit }, { userID, firstName, lastName, age, gender, userRole, email, phone }) {
+  //   try {
+  //     const res = await axios({
+  //       method: "PATCH",
+  //       data: {
+  //         userID,
+  //         firstname: firstName,
+  //         lastname: lastName,
+  //         age: age,
+  //         gender,
+  //         role: userRole,
+  //         email: email,
+  //         phone: phone
+  //       },
+  //       withCredentials: true,
+  //       url: `${apiURL}users/${userID}`,
+  //     });
+  //     console.log(res.data);
+  //     commit('setUsers', res.data);
+  //   } catch (error) {
+  //     console.error('Error updating user:', error);
+  //   }
+  // }
 
   },
   modules: {

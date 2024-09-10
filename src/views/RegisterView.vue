@@ -184,5 +184,10 @@ margin-block: 2rem;
   width: 300px;
   height: 2rem;
 }
+@media screen and (max-width: 700px) {
+ .container-fluid{
+  width: 500px;
+ }
+}
 
 </style>

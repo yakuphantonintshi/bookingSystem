@@ -1,6 +1,7 @@
 <template>
-    <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
-    <h1>USER LOGIN PAGE</h1>
+
+<span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
+<h1>ADMIN LOGIN PAGE</h1>
 <form @submit.prevent="handleSubmit">
     <h4>LOGIN</h4>
 
@@ -9,7 +10,7 @@
 
 <label for="password">Enter your password</label>
 <input type="password" id="password" v-model="password" name="password" required>
-<button type="submit">LOGIN</button>
+<button type="submit" @click="Gotonext">LOGIN</button>
 <span id="error-message" style="color: red;"></span>
 
 </form>
@@ -25,9 +26,10 @@ export default {
     }
   },
   methods: {
+    Gotonext(){
+      this.$router.push({name: 'adminView'})
+    },
     handleSubmit() {
-      console.log(this.email, this.password);
-      
       this.$store.dispatch('login', {
         email: this.email,
         pwd: this.password,
@@ -39,6 +41,10 @@ export default {
 
 
 <style scoped>
+
+@media screen and (max-width: 950px) {
+ 
+}
 
 .bi{
     font-size: 4rem;
@@ -57,13 +63,14 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 35rem;
+    /* margin-left: 35rem; */
+    margin-inline-start: 30rem;
     margin-top: 1rem;
     background-color:#001f31;
     border: 3px solid #7ddff1;
 }
 h1{
-  color: #7ddff1;
+    color: #7ddff1;
 }
 input{
     width: 300px;

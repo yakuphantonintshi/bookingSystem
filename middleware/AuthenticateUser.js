@@ -14,10 +14,7 @@ function createToken(user){
         }
     )
 }
-export {
-    createToken,
-    verifyToken
-}
+
 
 function verifyToken(req, res, next){
     const token = req?.headers["authorization"]
@@ -36,4 +33,9 @@ function verifyToken(req, res, next){
             msg: "Please login"
         })
     }
+}
+
+export {
+    createToken,
+    verifyToken
 }

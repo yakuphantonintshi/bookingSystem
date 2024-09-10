@@ -6,7 +6,7 @@ class Users {
     fetchUsers(req, res) {
         try {
             const strQry = `
-                SELECT userID, firstName, lastName, email, gender, age, pwd
+                SELECT *
                  FROM Users;
                 `;
             db.query(strQry, (err, results) => {
@@ -71,7 +71,6 @@ async registerUser(req, res) {
           }
         });
       } catch (e) {
-        console.errow(e);
         res.status(500).json({
           err: "An error occured during registration",
         });
@@ -127,19 +126,20 @@ deleteUser(req, res) {
     try {
         const { email, pwd} = req.body
         const strQry = `
-        SELECT userID, firstName, lastName, email, gender, age, pwd
+        SELECT *
         FROM Users
         WHERE email = '${email}';
         `
-        db.query(strQry, async (err, result) => {
+        db.query(strQry, async (err, results) => {
             if (err) throw new Error ('Invalid login details')
-                if (!result?.length) {
+                if (!results?.length) {
                     res.json({
                         status: 401,
-                        msg: 'You provided a wrong email'
+                        msg: 'You provided a wrong email',
+                        results
                     })
                 } else {
-                    const isValidPass = await compare(pwd, result[0].pwd)
+                    const isValidPass = await compare(pwd, results[0].pwd)
                     if (isValidPass) {
                         const token = createToken({
                             email,
@@ -148,7 +148,7 @@ deleteUser(req, res) {
                         res.json({
                             status: res.statusCode, 
                             token,
-                            result: result[0]
+                            results: results[0]
                         })
                     } else {
                         res.json({

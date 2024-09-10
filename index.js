@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(cors())
 
 
-app.use('/Users', userRouter )
+app.use('/users', userRouter )
 app.use('/eastern', officeRouter )
 app.use('/freestate', freestateRouter )
 app.use('/gauteng', gautengRouter )

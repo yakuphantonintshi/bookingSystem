@@ -1,4 +1,5 @@
 <template>
+
 <span class="arrow"><a href="/"><i class="bi bi-arrow-left-circle"></i></a></span>
 <h1>ADMIN LOGIN PAGE</h1>
 <form @submit.prevent="handleSubmit">
@@ -41,6 +42,10 @@ export default {
 
 <style scoped>
 
+@media screen and (max-width: 950px) {
+ 
+}
+
 .bi{
     font-size: 4rem;
     display: flex;
@@ -58,7 +63,8 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 35rem;
+    /* margin-left: 35rem; */
+    margin-inline-start: 30rem;
     margin-top: 1rem;
     background-color:#001f31;
     border: 3px solid #7ddff1;

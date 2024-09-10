@@ -9,6 +9,7 @@ import FAQView from '@/views/FAQView.vue'
 import ContactView from '@/views/ContactView.vue'
 import AdminLogin from '@/views/AdminLogin.vue'
 import AdminView from '@/views/AdminView.vue'
+import BookingSummary from '@/views/BookingSummary.vue'
 
 const routes = [
   {
@@ -70,7 +71,15 @@ const routes = [
     name: 'adminView',
     component: AdminView,
     meta: { navbarColor: '#001f31'}
-  }
+  },
+  {
+
+    path: '/bookingSummary',
+    name: 'bookingSummary',
+    component: BookingSummary,
+    meta: { navbarColor: '#001f31'}
+  },
+
 ]
 
 const router = createRouter({

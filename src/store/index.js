@@ -25,11 +25,33 @@ export default createStore({
       northern: null,
       gauteng: null,
       departure: null,
-      travelling: null
+      travelling: null,
+      // new ones
+      selectedDeparture: null,
+    selectedTravelling: null,
+    numberOfPeople: 1,
+    selectedDate: null,
+    departureTime: null,
+    returningDate: null,
+    distance: 0,
+    priceInZAR: 0,
+    arrivalTime: null,
+    arrivalDate: null,
+    isResultsDiplayed: false
   },
-  getters: {
-  },
+  getters:  {
+      bookingData: state => state,
+      isResultsDiplayed: state => state.isResultsDiplayed
+    },
+  
   mutations: {
+    updateBooking(state, bookingData) {
+      Object.assign(state, bookingData);
+    },
+    displayResults(state, value) {
+      state.isResultsDiplayed = value;
+    },
+  // hygjhkiljo
     setUsers(state, value) {
       state.users = value
     },
@@ -62,6 +84,10 @@ export default createStore({
     }
   },
   actions: {
+    confirmBooking({ commit }, bookingData) {
+      commit('updateBooking', bookingData);
+      commit('displayResults', true);
+    },
     async fetchUsers(context) {
       try {
         const response = await axios.get(`${apiURL}users`)
@@ -293,26 +319,29 @@ export default createStore({
     console.log(res.data)
         commit('setUsers',res.data)
   },
-  async editUser({commit}, {userID, firstName, lastName, age, gender, userRole, email, number}){
-    // console.log(id, first_name, last_name, user_age, gender, user_role, email_add, user_pass, user_profile)
-    const res = await axios({
-      method: "PATCH",
-      data: {
-        userID,
-        firstname: firstName,
-        lastname: lastName,
-        age: age,
-        gender,
-        role: userRole,
-        email: email,
-        number: number
-      },
-      withCredentials: true,
-      url: `${apiURL}users/${userID}`,
-    })
-    console.log(res.data)
-    commit('setUsers',res.data)
-  },
+  // async editUser({ commit }, { userID, firstName, lastName, age, gender, userRole, email, phone }) {
+  //   try {
+  //     const res = await axios({
+  //       method: "PATCH",
+  //       data: {
+  //         userID,
+  //         firstname: firstName,
+  //         lastname: lastName,
+  //         age: age,
+  //         gender,
+  //         role: userRole,
+  //         email: email,
+  //         phone: phone
+  //       },
+  //       withCredentials: true,
+  //       url: `${apiURL}users/${userID}`,
+  //     });
+  //     console.log(res.data);
+  //     commit('setUsers', res.data);
+  //   } catch (error) {
+  //     console.error('Error updating user:', error);
+  //   }
+  // }
 
   },
   modules: {

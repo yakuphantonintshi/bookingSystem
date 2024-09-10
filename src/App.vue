@@ -22,7 +22,7 @@ export default {
     },
     showNavbar() {
       // return this.$route.name !== 'home';
-      const visibleNavbarRoutes = ['/about', '/offices', '/tickets', '/faq', '/contact'];
+      const visibleNavbarRoutes = ['/about', '/offices', '/tickets', '/faq', '/contact', '/bookingSummary'];
       return visibleNavbarRoutes.includes(this.$route.path);
     },
   },

@@ -28,6 +28,10 @@ img[alt='icon'] {
   box-shadow: 2px 2px 5px#7ddff1;
 }
 
+/* Hide all modal backdrops */
+.modal-backdrop {
+  display: none !important;
+}
 
 
 #app {

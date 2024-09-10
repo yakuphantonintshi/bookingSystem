@@ -37,7 +37,7 @@
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.number }}</td>
+        <td>{{ user.phone }}</td>
         <td>{{ user.gender }}</td>
         <td>{{ user.age }}</td>
         <td>{{ user.userRole }}</td>
@@ -53,14 +53,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <input type="text" placeholder="First Name" id="firstName">
-        <input type="text" placeholder="Last Name" id="lastName">
-        <input type="text" placeholder="Email Address" id="email">
-        <input type="number" placeholder="Number" id="number">
-        <input type="text" placeholder="Gender" id="gender">
-        <input type="text" placeholder="Age"  id="age">
-        <input type="text" placeholder="Your role" id="role">
-        </div>
+  </div>
         <div class="modal-footer">
         <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" id="save" class="btn btn-primary">Save changes</button>
@@ -107,27 +100,6 @@ export default{
         alert("action was aborted");
       }
     },
-    // editUser(userID) {
-    //   let userName = document.querySelector("#firstName").value;
-    //   let lastname = document.querySelector("#lastName").value;
-    //   let age = document.querySelector("#age").value;
-    //   let gender = document.querySelector("#gender").value;
-    //   let userRole = document.querySelector("#role").value;
-    //   let email = document.querySelector("#email").value;
-    //   let number = document.querySelector("#number").value;
-
-    //   this.$store.dispatch("editUser", {
-    //     userID,
-    //     userName,
-    //     lastname,
-    //     age,
-    //     gender,
-    //     userRole,
-    //     email,
-    //     number
-    //   });
-    //   location.reload();
-    // },
     },
     mounted(){
         this.getUsers();

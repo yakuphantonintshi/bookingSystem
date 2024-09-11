@@ -9,6 +9,7 @@
     <div class="container-fluid dvh-100">
       <!-- Departure Dropdown -->
       <div v-if="departure?.length">
+        <label for="From">Departing From:</label>
         <select
           id="departure"
           name="departure"
@@ -32,6 +33,7 @@
 
       <!-- Travelling Dropdown -->
       <div v-if="travelling?.length">
+        <label for="From">Destination:</label>
         <select
           id="travelling"
           name="travelling"
@@ -52,9 +54,8 @@
       <div v-else>
         <SpinnerComp />
       </div>
-
       <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
-      <option value="" disabled selected>Select number of people</option>
+      <option value="" disabled selected>Number of seats</option>
       <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
     </select>
 
@@ -252,11 +253,6 @@ export default {
       // Dispatch the Vuex action to save the booking data
       this.$store.dispatch('confirmBooking', bookingData);
       this.$router.push({name: 'bookingSummary'})
-
-      // Close modal
-      // const modal = document.getElementById('BookTicket');
-      // const modalInstance = bootstrap.Modal.getInstance(modal);
-      // modalInstance.hide();
     },
     validateDate() {
       if (this.selectedDate && this.selectedDate < this.todayDate) {
@@ -347,11 +343,6 @@ export default {
   this.distance = Math.round(distance);
   this.calculatePrice();
 },
-
-    //     calculatePrice() {
-    //   this.priceInZAR = (this.distance * this.ratePerKm).toFixed(2);
-    //   console.log('Distance:', this.distance, 'Type:', typeof this.distance);
-    // },
         haversine(lat1, lon1, lat2, lon2) {
             const toRadians = (degrees) =>  degrees * (Math.PI / 180);
             // Radius of the Earth in kilometers

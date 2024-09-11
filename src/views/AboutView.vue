@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid dvh-100">
+  <div class="container-fluid vh-100">
 
   <h1 class="fade-in">WELCOME TO SEAT SAVER</h1>
   <div class="row">

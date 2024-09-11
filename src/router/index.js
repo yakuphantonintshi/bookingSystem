@@ -10,6 +10,8 @@ import ContactView from '@/views/ContactView.vue'
 import AdminLogin from '@/views/AdminLogin.vue'
 import AdminView from '@/views/AdminView.vue'
 import BookingSummary from '@/views/BookingSummary.vue'
+import Routes from '@/views/Routes.vue'
+import RouterOne from '@/views/RouterOne.vue'
 
 const routes = [
   {
@@ -70,15 +72,26 @@ const routes = [
     path: '/adminView',
     name: 'adminView',
     component: AdminView,
-    meta: { navbarColor: '#001f31'}
+    meta: { navbarColor: '#003c6c'}
   },
   {
-
     path: '/bookingSummary',
     name: 'bookingSummary',
     component: BookingSummary,
     meta: { navbarColor: '#001f31'}
   },
+  {
+    path: '/routes',
+    name: 'routes',
+    component: Routes,
+    meta: { navbarColor: '#001f31'}
+  },
+  { path: '/route/:routeID', 
+    name: 'RouteDetails',
+     component: RouterOne, 
+     props: true,
+     meta: { navbarColor: '#001f31'}
+     },
 
 ]
 

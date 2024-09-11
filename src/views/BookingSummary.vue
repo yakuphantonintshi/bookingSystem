@@ -1,6 +1,6 @@
 <template>
     <h1>YOUR BOOKING DETAILS:</h1>
-    <div v-if="isResultsDiplayed" class="container-fluid dvh-100">
+    <div v-if="isResultsDiplayed" class="container-fluid vh-100">
 
          <p class="booking-details">
       <table>
@@ -101,14 +101,13 @@ methods: {
     background-color: #7ddff1;
   }
   table{ 
-    width: 500px;
+    width: 60rem;
     padding: 2rem;
   }
   :is(th, td, tr){
     border: 2px solid white;
   }
 .booking-details{
-    background: #000;
     color: white;
 }
 .container-fluid{

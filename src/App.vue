@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <NavBar :style="{ backgroundColor: currentNavbarColor }" v-if="showNavbar"/>
-    <main>
+    <main class="main dvh-100">
       <router-view/>
     </main>
     <Footer/>
@@ -21,9 +21,8 @@ export default {
       return this.$route.meta.navbarColor || '#333';
     },
     showNavbar() {
-      // return this.$route.name !== 'home';
-      const visibleNavbarRoutes = ['/about', '/offices', '/tickets', '/faq', '/contact', '/bookingSummary'];
-      return visibleNavbarRoutes.includes(this.$route.path);
+      const visibleNavbarRoutes = ['about', 'offices', 'tickets', 'faq', 'contact', 'bookingSummary', 'routes','RouteDetails', 'adminView'];
+      return visibleNavbarRoutes.includes(this.$route.name);
     },
   },
 };

@@ -51,9 +51,14 @@ export default createStore({
     displayResults(state, value) {
       state.isResultsDiplayed = value;
     },
-  // hygjhkiljo
     setUsers(state, value) {
       state.users = value
+    },
+    updateUserInState(state, updatedUser) {
+      const index = state.users.findIndex(user => user.userID === updatedUser.userID);
+      if (index !== -1) {
+        state.users.splice(index, 1, updatedUser);
+      }
     },
     setEastern(state, payload) {
       state.eastern = payload
@@ -169,6 +174,7 @@ export default createStore({
         
       }
     },
+    
     async login(context, payload){
       try {
         const { token, msg, results } = await (await axios.post(`${apiURL}users/login`, payload)).data
@@ -319,29 +325,20 @@ export default createStore({
     console.log(res.data)
         commit('setUsers',res.data)
   },
-  // async editUser({ commit }, { userID, firstName, lastName, age, gender, userRole, email, phone }) {
-  //   try {
-  //     const res = await axios({
-  //       method: "PATCH",
-  //       data: {
-  //         userID,
-  //         firstname: firstName,
-  //         lastname: lastName,
-  //         age: age,
-  //         gender,
-  //         role: userRole,
-  //         email: email,
-  //         phone: phone
-  //       },
-  //       withCredentials: true,
-  //       url: `${apiURL}users/${userID}`,
-  //     });
-  //     console.log(res.data);
-  //     commit('setUsers', res.data);
-  //   } catch (error) {
-  //     console.error('Error updating user:', error);
-  //   }
-  // }
+
+  async updateUser({ commit }, { id, updatedUser }) {
+    try {
+      const response = await axios({
+        method: "PATCH",
+        url: `${apiURL}users/${id}`,
+        data: updatedUser,
+      });
+      commit("updateUserInState", response.data);
+    } catch (error) {
+      console.log("Failed to update user:", error);
+      throw new Error("Failed to update user.");
+    }
+  }
 
   },
   modules: {

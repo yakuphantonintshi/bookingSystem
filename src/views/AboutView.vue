@@ -96,5 +96,110 @@ button{
 button:hover{
   background-color: #7ddff1;
 }
+@media (max-width: 930px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .paragraph {
+    font-size: 1.7rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+
+  button {
+    margin-left: 15rem;
+    width: 170px;
+    height: 50px;
+  }
+
+  img {
+    width: 90%;
+    height: auto;
+  }
+}
+
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  button {
+    margin-left: 8rem;
+    width: 160px;
+    height: 45px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Media query for screens smaller than 400px */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .paragraph {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    margin-left: 5rem;
+    width: 150px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Media query for 300px or smaller */
+@media (max-width: 300px) {
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .paragraph {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    margin-left: 2rem;
+    width: 140px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 </style>

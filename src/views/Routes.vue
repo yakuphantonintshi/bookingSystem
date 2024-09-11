@@ -126,5 +126,112 @@ input{
     border: 1.3px solid black;
     padding-inline-start: 1rem;
 }
+@media (max-width: 930px) {
+  .routes {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
 
+  input {
+    width: 90%;
+    margin-inline: 0;
+  }
+
+  .routes-view {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    width: 90%;
+    height: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .routes {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+
+  input {
+    width: 90%;
+    margin-inline: 0;
+  }
+
+  .routes-view {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Media query for screens smaller than 400px */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .routes-view {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Media query for screens smaller than 300px */
+@media (max-width: 300px) {
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .routes-view {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
 </style>

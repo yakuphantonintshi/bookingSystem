@@ -478,4 +478,45 @@ button {
   border: 2px solid #7ddff1;
   color: white;
 }
+@media (max-width: 768px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .booking-result {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  button {
+    width: 100%;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  .booking-result {
+    width: 100%;
+  }
+  h1 {
+    font-size: 1.2rem;
+    padding: 0;
+  }
+  button {
+    width: 100%;
+    height: 2.5rem;
+  }
+}
 </style>

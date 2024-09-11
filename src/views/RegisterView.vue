@@ -189,5 +189,101 @@ margin-block: 2rem;
   width: 500px;
  }
 }
+@media screen and (max-width: 700px) {
+  .container-fluid {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container-fluid {
+    width: 90%;
+  }
+
+  .bi {
+    font-size: 3rem;
+    margin-left: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 90%;
+    margin-left: 0;
+  }
+
+  button {
+    width: 90%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .bi {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .bi {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  button {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 100%;
+  }
+}
 
 </style>

@@ -47,6 +47,7 @@ export default {
     margin-top: 1.5rem;
    color: #7ddff1;
 }
+
 a{
   color: transparent;
 }
@@ -62,26 +63,30 @@ form{
     background-color:#001f31;
     border: 3px solid #7ddff1;
 }
+
 h1{
   color: #7ddff1;
 }
+
 input{
     width: 300px;
     height: 40px;
     border-radius: 4px;
-
 }
+
 label{
     font-size: 1rem;
     color: #f6f0f7;
     padding-block: 2.5rem;
 }
+
 h4{
     color: white;
     font-size: 2rem;
     font-weight: bold;
     padding-top: 2rem;
 }
+
 button{
     margin-top: 3rem;
     width: 300px;
@@ -90,6 +95,48 @@ button{
     border: 2px solid #7ddff1;
     color: white;
     font-size: 1.3rem;
+}
+
+/* Media query for 300px responsiveness */
+@media (max-width: 930px) {
+  form {
+    width: 100%;
+    margin-left: 0;
+    padding: 1rem;
+    border-width: 2px;
+  }
+
+  .bi {
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+    padding-block: 1rem;
+  }
+
+  input {
+    width: 90%;
+    height: 35px;
+  }
+
+  button {
+    width: 90%;
+    height: 40px;
+    font-size: 1.1rem;
+  }
 }
 
 </style>

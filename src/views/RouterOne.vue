@@ -166,5 +166,84 @@ export default {
   font-weight: bold;
   text-shadow: 3px 3px 5px #7ddff1;
   }
+  @media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .booking-details {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .book, .checkout {
+    width: 100%;
+  }
+}
+
+/* Media query for screens smaller than 400px */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .booking-details {
+    font-size: 1rem;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .book, .checkout {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+/* Media query for screens smaller than 300px */
+@media (max-width: 300px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .book, .checkout {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .booking-details {
+    font-size: 0.9rem;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+
+  .bi {
+    font-size: 3rem;
+  }
+}
   </style>
   

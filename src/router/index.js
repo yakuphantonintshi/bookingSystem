@@ -12,6 +12,7 @@ import AdminView from '@/views/AdminView.vue'
 import BookingSummary from '@/views/BookingSummary.vue'
 import Routes from '@/views/Routes.vue'
 import RouterOne from '@/views/RouterOne.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
   {
@@ -91,7 +92,13 @@ const routes = [
      component: RouterOne, 
      props: true,
      meta: { navbarColor: '#001f31'}
-     },
+  },
+  { 
+    path: '/profile', 
+    name: 'Profile',
+    component: ProfileView, 
+    meta: { navbarColor: '#001f31'}
+  },
 
 ]
 

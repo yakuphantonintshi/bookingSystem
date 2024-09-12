@@ -11,6 +11,9 @@ applyToken(cookies.get('legitUser')?.token)
 
 const apiURL = 'http://localhost:3001/'
 
+const test = "here"
+console.log(test);
+
 
 export default createStore({
   state: {

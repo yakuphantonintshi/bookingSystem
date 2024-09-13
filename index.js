@@ -1,7 +1,7 @@
-import { userRouter, express } from "./Controller/UserController.js";
+import { userRouter, express, bookingsRouter } from "./Controller/UserController.js";
 import { cityRouter} from "./Controller/DepartureController.js"
 import { townRouter} from "./Controller/TravellingController.js"
-import { bookingsRouter } from "./Controller/Bookings.js";
+
 import {freestateRouter, gautengRouter, KznRouter, northenRouter, officeRouter, westernRouter } from "./Controller/OfficeController.js";
 import path from "path";
 import cors from 'cors'

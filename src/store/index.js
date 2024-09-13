@@ -1,16 +1,16 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
-import { useCookies } from 'vue3-cookies'
 import 'vue3-toastify/dist/index.css'
+import { useCookies } from 'vue3-cookies'
 import { applyToken } from '@/service/AuthenticateUser.js'
 import router from '@/router'
 const {cookies} = useCookies()
 
 applyToken(cookies.get('legitUser')?.token)
 
-// const apiURL = 'http://localhost:3001/'
-const apiURL = "https://bookingsystem-qbd3.onrender.com/"
+const apiURL = 'http://localhost:3001/'
+// const apiURL = "http://localhost:3001/"
 
 const test = "here"
 console.log(test);
@@ -18,6 +18,7 @@ console.log(test);
 
 export default createStore({
   state: {
+    bookings: null,
     users: null,
     user: null,
       password: '',
@@ -49,9 +50,9 @@ export default createStore({
     },
   
   mutations: {
-    updateBooking(state, bookingData) {
-      Object.assign(state, bookingData);
-    },
+    // updateBooking(state, bookingData) {
+    //   Object.assign(state, bookingData);
+    // },
     displayResults(state, value) {
       state.isResultsDiplayed = value;
     },
@@ -62,6 +63,12 @@ export default createStore({
       const index = state.users.findIndex(user => user.userID === updatedUser.userID);
       if (index !== -1) {
         state.users.splice(index, 1, updatedUser);
+      }
+    },
+    updateBookingInState(state, updatedBooking) {
+      const index = state.bookings.findIndex(booking => booking.bookingID === updatedBooking.bookingID);
+      if (index !== -1) {
+        state.bookings.splice(index, 1, updatedUser);
       }
     },
     setEastern(state, payload) {
@@ -90,6 +97,9 @@ export default createStore({
     },
     setUser(state, value){
       state.travelling = value
+    },
+    setBookings(state, value){
+      state.bookings = value
     }
   },
   actions: {
@@ -106,6 +116,26 @@ export default createStore({
           context.commit('setUsers', results.results)
         } else {
           toast.error(`We are not able to fetch the users`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchBookings(context) {
+      try {
+        const response = await axios.get(`${apiURL}bookings`)
+        const results = response.data
+        
+       if (results) {
+          context.commit('setBookings', results.results)
+        } else {
+          toast.error(`We are not able to fetch the bookings`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
@@ -162,11 +192,14 @@ export default createStore({
         const { token, msg } = await (await axios.post(`${apiURL}users/register`, payload)).data
         console.log(token);
         if (token) {
-          context.dispatch('fetchUsers')
           toast.success(`New user has been added. Thank you🤓`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER
+            autoClose: 5000,
+            position: toast.POSITION.TOP_CENTER
           })
+          setTimeout(() => {
+            router.push({name : 'login'})
+          }, 3000);
+
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -341,6 +374,19 @@ export default createStore({
     } catch (error) {
       console.log("Failed to update user:", error);
       throw new Error("Failed to update user.");
+    }
+  },
+  async updateBooking({ commit }, { id, updateBooking }) {
+    try {
+      const response = await axios({
+        method: "PATCH",
+        url: `${req.params.id} ${req.params.bid}`,
+        data: updateBooking,
+      });
+      commit("updateBookingInState", response.data);
+    } catch (error) {
+      console.log("Failed to update booking:", error);
+      throw new Error("Failed to update booking.");
     }
   }
 

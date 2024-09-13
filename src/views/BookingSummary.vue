@@ -1,6 +1,6 @@
 <template>
     <h1>YOUR BOOKING DETAILS:</h1>
-    <div v-if="isResultsDiplayed" class="container-fluid vh-100">
+    <div v-if="isResultsDiplayed" class="container-fluid dvh-100">
 
          <p class="booking-details">
       <table>

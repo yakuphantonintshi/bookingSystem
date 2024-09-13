@@ -1,6 +1,6 @@
 <template>
     <div class="container vh-100 profile-container">
-        <div class="personal-info bg-white d-flex flex-column align-items-center py-5 gap-5">
+        <div class="personal-info d-flex flex-column align-items-center py-5 gap-5">
             <!-- <img :src="user.profileImg" alt="Image of user"> -->
             <div class="image"></div>
             <div class="profile">
@@ -11,7 +11,7 @@
                 <p>{{user.phoneNumber}}</p>
             </div>
         </div>
-        <div class="booking-info bg-white py-5 d-flex flex-column align-items-center gap-5">
+        <div class="booking-info py-5 d-flex flex-column align-items-center gap-5">
             <h1>Booking</h1>
             <div class="booking-data">
                 <div class="top d-flex justify-content-between px-4 align-items-center pt-3">
@@ -65,6 +65,9 @@ export default {
 </script>
 
 <style scoped>
+.container{
+    border: 2px solid #7ddff1;
+}
     .personal-info {
         border-right: 1px solid rgb(194, 194, 194);
     }
@@ -79,13 +82,13 @@ export default {
         height: 150px;
         width: 150px;
         border-radius: 100%;
-        background: gray;
+        background: #406369;
     }
 
     .booking-data {
         height: 300px;
         width: 500px;
-        background: rgb(248, 248, 248);
+        background: #7ddff1;
         box-shadow: 0 0 10px 0 rgb(90, 90, 90);
         border: .5px solid gray;
         border-radius: 8px;

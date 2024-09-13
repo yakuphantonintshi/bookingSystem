@@ -13,44 +13,40 @@
     <div class="row">
       <div class="col">
         <form action="https://formspree.io/f/xdknjdbj" method="POST">
-          <input
-            type="text"
-            placeholder="Enter your name"
-            id="name"
-            name="name"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="+27 000 000 000"
-            id="number"
-            name="phone"
-          />
-
-          <input
-            type="email"
-            placeholder="example@gmail.com"
-            id="email"
-            name="email"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Enter the subject"
-            id="subject"
-            name="subject"
-          />
-          <textarea
-            name="message"
-            id="message"
-            rows="5"
-            placeholder="Message"
-          ></textarea>
-          <br />
-          <button type="submit">SUBMIT</button>
-        </form>
+  <input
+    type="text"
+    placeholder="Enter your name"
+    id="name"
+    name="name"
+  />
+  <input
+    type="text"
+    placeholder="+27 000 000 000"
+    id="number"
+    name="phone"
+  />
+  <input
+    type="email"
+    placeholder="example@gmail.com"
+    id="email"
+    name="email"
+  />
+  <input
+    type="text"
+    placeholder="Enter the subject"
+    id="subject"
+    name="subject"
+  />
+  <textarea
+    name="message"
+    id="message"
+    rows="5"
+    placeholder="Message"
+  ></textarea>
+  <button type="submit">SUBMIT</button>
+</form>
       </div>
-      <div class="col">
+      <div class="col" id="column">
         <div class="card mb-3" style="max-width: 540px">
           <div class="row g-0">
             <div class="col-md-4">
@@ -134,27 +130,44 @@ input {
   box-shadow: 4px 4px 7px #7ddff1;
   color: white;
 }
-textarea {
-  width: 400px;
+#column{
+  margin-left: 9rem;
+}
+input, textarea {
+  height: 60px; /* Consistent height for inputs */
+  width: 100%; /* Full width within grid cells */
   background-color: transparent;
-  /* border: 2px solid #7ddff1; */
+  border: 2px solid #7ddff1;
   border-bottom: 2px solid #7ddff1;
   border-right: 2px solid #7ddff1;
   box-shadow: 4px 4px 7px #7ddff1;
   color: white;
+  padding: 0 0.5rem; /* Add padding inside inputs */
+}
+textarea {
+  height: auto; /* Let height be auto for variable content */
+  grid-column: span 2; /* Span across two columns */
 }
 button {
-  width: 250px;
+  width: 100%; /* Full width within grid cell */
   height: 60px;
-  margin-left: 7rem;
   margin-top: 1rem;
   background-color: #7ddff1;
   color: #001f31;
   border: 2px solid #001f31;
   box-shadow: 4px 4px 7px #7ddff1;
+  grid-column: span 2; /* Span across two columns */
 }
-form {
-  margin-top: 2rem;
+
+  form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for input fields */
+  gap: 1rem; /* Space between items */
+  background: #001f31;
+  padding: 2rem; /* Padding inside the form */
+  border: 2px solid #7ddff1;
+  border-radius: 5px; /* Optional: add border-radius for rounded corners */
+
 }
 :is(#card-title, #card-text) {
   color: #001f31;
@@ -184,7 +197,7 @@ form {
   color: white;
 }
 .container-fluid {
-  background-color: #001f31;
+  background-color: transparent;
 }
 h1 {
   text-shadow: 2px 2px 5px #7ddff1;
@@ -194,4 +207,5 @@ h3 {
   padding-top: 1rem;
   text-shadow: 2px 2px 5px #7ddff1;
 }
+
 </style>

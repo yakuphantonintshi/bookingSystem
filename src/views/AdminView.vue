@@ -4,6 +4,7 @@
   <div class="table">
     <table  v-if="users?.length">
         <tr>
+        <th>PROFILE</th>
         <th>USER_ID</th>
         <th>USER_NAME</th>
         <th>USER AGE</th>
@@ -16,6 +17,7 @@
     </tr>
 
     <tr v-for="user in users" :key="user.userID">
+      <td><img :src=user.userProfile alt="picture"></td>
         <td>{{ user.userID}}</td>
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
@@ -86,6 +88,90 @@
         <SpinnerComp />
     </div>
   </div>
+  <h1>BOOKING TABLE</h1>
+  <div class="table">
+    <table  v-if="bookings?.length">
+        <tr>
+        <th>BOOKING_ID</th>
+        <th>USER_ID</th>
+        <th>DATE_TIME</th>
+        <th>FULL NAME</th>
+        <th>FROM</th>
+        <th>TO</th>
+        <th>PRICE</th>
+        <th>ACTIONS:</th>
+    </tr>
+
+    <tr v-for="booking in bookings" :key="booking.bookingID">
+        <td>{{ booking.bookingID}}</td>
+        <td>{{ booking.userID }}</td>
+        <td>{{ booking.DateTime }}</td>
+        <td>{{ booking.FullName }}</td>
+        <td>{{ booking.departureCity }}</td>
+        <td>{{ booking.travellingCity }}</td>
+        <td>R {{ booking.Price }}</td>
+        <td><button type="button" class="delete" @click="deleteBooking(booking.bookingID)"><i class="bi bi-trash3"></i></button>
+          <button type="button" class="edit btn-primary" @click="openModal(booking)" data-bs-toggle="modal" data-bs-target="#editModal">
+            <i class="bi bi-pencil"></i>
+          </button>
+             <!-- modal for editing a booking -->
+             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit Booking</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="firstName" class="form-label">Date and Time</label>
+                <input type="datetime" class="form-control" v-model="editBooking.DateTime" />
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Fullname</label>
+                <input type="text" class="form-control"  v-model="editBooking.FullName" />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">FROM:</label>
+                <input type="email" class="form-control" id="email" v-model="editBooking.departureCity" />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">TO:</label>
+                <input type="text" class="form-control" id="phone" v-model="editBooking.travellingCity" />
+              </div>
+              <div class="mb-3">
+                <label for="gender" class="form-label">PRICE</label>
+                <input type="text" class="form-control" id="gender" v-model="editBooking.Price" />
+              </div>
+              <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" v-model="editBooking.age" />
+              </div>
+              <div class="mb-3">
+                <label for="userRole" class="form-label">Role</label>
+                <input type="text" class="form-control" id="userRole" v-model="editBooking.userRole" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="saveChangess">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        </td>
+            
+
+
+    </tr>
+    </table>
+    <div v-else>
+        <SpinnerComp />
+    </div>
+  </div>
     </div>
 
             
@@ -100,18 +186,22 @@ export default{
     return{
 
       editableUser: {},
+      editBooking: {},
     }
   },
     components: {
         SpinnerComp
     },
     computed: {
-        ...mapState(["users"])
+        ...mapState(["users", "bookings"])
         
     },
     methods: {
       openEditModal(user) {
-      this.editableUser = { ...user }; // Create a copy of the selected user for editing
+      this.editableUser = { ...user };
+    },
+    openModal(booking) {
+      this.editBooking = { ...booking}
     },
 
     async saveChanges() {
@@ -127,8 +217,25 @@ export default{
       alert("Failed to update user.");
     }
   },
+  async saveChangess() {
+  try {
+    await this.$store.dispatch("updateBooking", {
+      id: this.editBooking.bookingID,
+      updatedBooking: this.editBooking,
+    });
+    alert("Booking updated successfully!");
+    // No need for location.reload() if state is updated correctly
+  } catch (error) {
+    console.error("Error saving changes:", error);
+    alert("Failed to update booking.");
+  }
+},
+
         async getUsers() {
             await this.$store.dispatch("fetchUsers")
+        },
+        async getBookings() {
+          await this.$store.dispatch("fetchBookings")
         },
         deleteUser(id) {
       if (confirm("are you sure you want to delete this user")) {
@@ -141,6 +248,7 @@ export default{
     },
     mounted(){
         this.getUsers();
+        this.getBookings();
     }
 }
 </script>
@@ -218,6 +326,9 @@ th{
 :is(#close,#save){
     background-color: transparent;
     border: 2px solid #7ddff1;
+}
+img{
+  width: 50px;
 }
 
 </style>

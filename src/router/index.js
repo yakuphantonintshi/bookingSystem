@@ -18,12 +18,14 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: { navbarColor: 'transparent'}
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    meta: { navbarColor: 'transparent'}
   },
   {
     path: '/register',
@@ -34,7 +36,7 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView,
-    meta: { navbarColor: '#001f31'}
+    meta: { navbarColor: 'transparent'}
   },
   {
     path: '/offices',
@@ -66,7 +68,7 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminLogin,
-    meta: { navbarColor: '#001f31'}
+    meta: { navbarColor: 'transparent'}
   },
   {
 

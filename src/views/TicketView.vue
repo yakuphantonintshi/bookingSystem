@@ -1,179 +1,190 @@
 <template>
   <form>
-    <div class="ticket">
-      <h1>BOOK YOUR TICKET!</h1>
-    </div>
-    <button type="button" class="one-way">One way</button>
-    <button @click="toggleDiv" type="button" class="return">Return</button>
-
-    <div class="container-fluid dvh-100">
-      <!-- Departure Dropdown -->
-      <div v-if="departure?.length">
-        <label for="From">Departing From:</label>
-        <select
-          id="departure"
-          name="departure"
-          class="dropdown"
-          v-model="selectedDeparture"
-          required
-        >
-          <option value="" disabled selected>Departing from</option>
-          <option
-            v-for="city in departure"
-            :key="city.departureID"
-            :value="city.departureCity"
-          >
-            {{ city.departureCity }}
-          </option>
-        </select>
-      </div>
-      <div v-else>
-        <SpinnerComp />
-      </div>
-
-      <!-- Travelling Dropdown -->
-      <div v-if="travelling?.length">
-        <label for="From">Destination:</label>
-        <select
-          id="travelling"
-          name="travelling"
-          class="dropdown"
-          v-model="selectedTravelling"
-          required
-        >
-          <option value="" disabled selected>Travelling To</option>
-          <option
-            v-for="town in filteredTravelling"
-            :key="town.travellingID"
-            :value="town.travellingCity"
-          >
-            {{ town.travellingCity }}
-          </option>
-        </select>
-      </div>
-      <div v-else>
-        <SpinnerComp />
-      </div>
-      <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
-      <option value="" disabled selected>Number of seats</option>
-      <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
-    </select>
-
-      <input type="date" v-model="selectedDate" class="date" :min="todayDate"
-      @change="validateDate"/>
-
-      <input type="time" v-model="departureTime" class="time"   :min="minTime" 
-      @change="validateTime"/>
-
-
-      <div v-show="isDivVisible" class="hidden-div">
-        <label for="returning-date">Returning Date:</label>
-        <input type="date" class="date" :min="todayDate" v-model="returningDate" @change="validateDate" />
-      </div>
-
-      <button class="submit-button" @click="displayResults()" type="button">Find Tickets</button>
-      <!-- start of the modal -->
-      <div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    </div>
-    <div class="booking-results-grid" 
-      v-if="isResultsDiplayed && selectedDeparture != null && selectedTravelling != null">
-      <div class="booking-result">
-        <h1 class="paragraph" id="select">{{ selectedDeparture }} TO {{ selectedTravelling }}</h1>
-        <p class="paragraph">Distance: {{ distance }} km</p>
-        <div v-if="arrivalTime && selectedDate">
-          <p class="paragraph">
-            Departure Date: {{ formattedDepartureDate }} <br />
-            Estimated Arrival Time: {{ arrivalTime }} <br />
-            Estimated Arrival Date: {{ formattedArrivalDate }}
-          </p>
+    <div class="form-container">
+      <div class="form-section">
+        <div class="ticket">
+          <h1>BOOK YOUR TICKET!</h1>
         </div>
-        <p class="paragraph"> Number of people travelling: {{ numberOfPeople }}</p>
-        <p class="paragraph">Price: R {{ priceInZAR }}</p>
-        <p v-if="isDivVisible && returningDate" class="paragraph">Returning Date: {{ formattedReturningDate }}</p>
-        
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookTicket" type="button">BOOK A TICKET</button>
+        <button type="button" class="one-way">One way</button>
+        <button @click="toggleDiv" type="button" class="return">Return</button>
 
-        <div class="modal fade" id="BookTicket" tabindex="-1" aria-labelledby="BookTicketLabel" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="BookTicketLabel">Edit Your Booking</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Editable form values -->
-        <div class="form-group">
-          <label for="modal-departure">Departing From</label>
-          <select id="modal-departure" v-model="selectedDeparture" class="form-control">
-            <option
-              v-for="city in departure"
-              :key="city.departureID"
-              :value="city.departureCity"
+        <div class="container-fluid dvh-100">
+          <!-- Departure Dropdown -->
+          <div v-if="departure?.length">
+            <label for="From">Departing From:</label>
+            <select
+              id="departure"
+              name="departure"
+              class="dropdown"
+              v-model="selectedDeparture"
+              required
             >
-              {{ city.departureCity }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-travelling">Travelling To</label>
-          <select id="modal-travelling" v-model="selectedTravelling" class="form-control">
-            <option
-              v-for="town in filteredTravelling"
-              :key="town.travellingID"
-              :value="town.travellingCity"
+              <option value="" disabled selected>Departing from</option>
+              <option
+                v-for="city in departure"
+                :key="city.departureID"
+                :value="city.departureCity"
+              >
+                {{ city.departureCity }}
+              </option>
+            </select>
+          </div>
+          <div v-else>
+            <SpinnerComp />
+          </div>
+
+          <!-- Travelling Dropdown -->
+          <div v-if="travelling?.length">
+            <label for="From">Destination:</label>
+            <select
+              id="travelling"
+              name="travelling"
+              class="dropdown"
+              v-model="selectedTravelling"
+              required
             >
-              {{ town.travellingCity }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-people">Number of People</label>
-          <select id="modal-people" v-model="numberOfPeople" class="form-control">
+              <option value="" disabled selected>Travelling To</option>
+              <option
+                v-for="town in filteredTravelling"
+                :key="town.travellingID"
+                :value="town.travellingCity"
+              >
+                {{ town.travellingCity }}
+              </option>
+            </select>
+          </div>
+          <div v-else>
+            <SpinnerComp />
+          </div>
+          <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
+            <option value="" disabled selected>Number of seats</option>
             <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
           </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-date">Departure Date</label>
-          <input type="date" id="modal-date" v-model="selectedDate" class="form-control" :min="todayDate" />
-        </div>
-        <div class="form-group">
-          <label for="modal-time">Departure Time</label>
-          <input type="time" id="modal-time" v-model="departureTime" class="form-control" :min="minTime" />
-        </div>
-        <div v-if="isDivVisible" class="form-group">
-          <label for="modal-returning-date">Returning Date</label>
-          <input type="date" id="modal-returning-date" v-model="returningDate" class="form-control" :min="todayDate" />
+
+          <input type="date" v-model="selectedDate" class="date" :min="todayDate"
+            @change="validateDate"/>
+
+          <input type="time" v-model="departureTime" class="time"   :min="minTime" 
+            @change="validateTime"/>
+
+          <div v-show="isDivVisible" class="hidden-div">
+            <label for="returning-date">Returning Date:</label>
+            <input type="date" class="date" :min="todayDate" v-model="returningDate" @change="validateDate" />
+          </div>
+
+          <button class="submit-button" @click="displayResults()" type="button">Find Tickets</button>
+          <!-- start of the modal -->
+          <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" @click="confirmBooking">Confirm your booking</button>
-      </div>
-    </div>
-  </div>
-</div>
+      <div class="result-section" v-if="isResultsDiplayed && selectedDeparture != null && selectedTravelling != null">
+        <div class="booking-results-grid">
+          <div class="booking-result">
+            <h1 class="paragraph" id="select">{{ selectedDeparture }} TO {{ selectedTravelling }}</h1>
+            <p class="paragraph">Distance: {{ distance }} km</p>
+            <div v-if="arrivalTime && selectedDate">
+              <p class="paragraph">
+                Departure Date: {{ formattedDepartureDate }} <br />
+                Estimated Arrival Time: {{ arrivalTime }} <br />
+                Estimated Arrival Date: {{ formattedArrivalDate }}
+              </p>
+            </div>
+            <p class="paragraph"> Number of people travelling: {{ numberOfPeople }}</p>
+            <p class="paragraph">Price: R {{ priceInZAR }}</p>
+            <p v-if="isDivVisible && returningDate" class="paragraph">Returning Date: {{ formattedReturningDate }}</p>
+
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#BookTicket" type="button">BOOK A TICKET</button>
+
+            <div class="modal fade" id="BookTicket" tabindex="-1" aria-labelledby="BookTicketLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="BookTicketLabel">Edit Your Booking</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="modal-departure">Departing From</label>
+                      <select id="modal-departure" v-model="selectedDeparture" class="form-control">
+                        <option
+                          v-for="city in departure"
+                          :key="city.departureID"
+                          :value="city.departureCity"
+                        >
+                          {{ city.departureCity }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="modal-travelling">Travelling To</label>
+                      <select id="modal-travelling" v-model="selectedTravelling" class="form-control">
+                        <option
+                          v-for="town in filteredTravelling"
+                          :key="town.travellingID"
+                          :value="town.travellingCity"
+                        >
+                          {{ town.travellingCity }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="modal-people">Number of People</label>
+                      <select id="modal-people" v-model="numberOfPeople" class="form-control">
+                        <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="modal-date">Departure Date</label>
+                      <input type="date" id="modal-date" v-model="selectedDate" class="form-control" :min="todayDate" />
+                    </div>
+                    <div class="form-group">
+                      <label for="modal-time">Departure Time</label>
+                      <input type="time" id="modal-time" v-model="departureTime" class="form-control" :min="minTime" />
+                    </div>
+                    <div v-if="isDivVisible" class="form-group">
+                      <label for="modal-returning-date">Returning Date</label>
+                      <input type="date" id="modal-returning-date" v-model="returningDate" class="form-control" :min="todayDate" />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn " @click="confirmBooking">Proceed to checkout</button>
+                    <div v-if="showMessage" class="overlay">
+                <div class="spinner-container">
+                  <!-- Checkout Icon -->
+                  <div class="checkout-icon-container">
+                      <i class="bi bi-check-square-fill"></i>
+                  </div>
+                  <p>Thank you for your booking!</p>
+                </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>
-  
 </template>
+
 
 <script>
 import { mapState } from "vuex";
@@ -184,6 +195,7 @@ export default {
   },
   data() {
     return {
+      showMessage: false,
       numberOfPeople: 1,  
       ratePerKm: 2,
       priceInZAR: 0,
@@ -204,7 +216,7 @@ export default {
   computed: {
     watch: {
     numberOfPeople() {
-      this.calculatePrice(); // Watch the number of people and recalculate price
+      this.calculatePrice();
     },
   },
     formattedDepartureDate() {
@@ -237,37 +249,25 @@ export default {
   },
   methods: {
     confirmBooking() {
-      const bookingData = {
-        selectedDeparture: this.selectedDeparture,
-        selectedTravelling: this.selectedTravelling,
-        numberOfPeople: this.numberOfPeople,
-        selectedDate: this.selectedDate,
-        departureTime: this.departureTime,
-        returningDate: this.returningDate,
-        distance: this.distance,
-        priceInZAR: this.priceInZAR,
-        arrivalTime: this.arrivalTime,
-        arrivalDate: this.arrivalDate
-      };
-
-      // Dispatch the Vuex action to save the booking data
-      this.$store.dispatch('confirmBooking', bookingData);
-      this.$router.push({name: 'bookingSummary'})
+      this.showMessage = true;
+      setTimeout(() => {
+        this.showMessage = false;
+      }, 5000); 
     },
     validateDate() {
       if (this.selectedDate && this.selectedDate < this.todayDate) {
         alert('Selected date cannot be in the past.');
-        this.selectedDate = this.todayDate; // Reset to today's date or previous valid date
+        this.selectedDate = this.todayDate;
       }
       if (this.returningDate && this.returningDate < this.todayDate) {
         alert('Returning date cannot be in the past.');
-        this.returningDate = this.todayDate; // Reset to today's date or previous valid date
+        this.returningDate = this.todayDate; 
       }
     },
     validateTime() {
       if (this.selectedDate === this.todayDate && this.departureTime && this.departureTime < this.minTime) {
         alert('Selected time cannot be in the past.');
-        this.departureTime = this.minTime; // Reset to current time or previous valid time
+        this.departureTime = this.minTime;
       }
     },
     displayResults(){
@@ -283,29 +283,22 @@ export default {
 
         calculateDepartureTime() {
     if (this.departureTime && this.distance) {
-      // Convert the departure time (input: HH:MM) to a Date object
       const [hours, minutes] = this.departureTime.split(':').map(Number);
-      const departureDate = new Date(this.selectedDate); // Use selected date from input
+      const departureDate = new Date(this.selectedDate);
       departureDate.setHours(hours, minutes, 0);
 
-      // Calculate travel time in hours
       const travelTimeInHours = this.distance / this.speed;
       const travelTimeInMilliseconds = travelTimeInHours * 60 * 60 * 1000;
 
-      // Add travel time to the departure date
       const arrivalDate = new Date(departureDate.getTime() + travelTimeInMilliseconds);
 
-      // Check if the distance is more than 1200 km, then add one day to the arrival date
       if (this.distance > 1200) {
         arrivalDate.setDate(arrivalDate.getDate() + 1);
       }
 
-      // Check if the arrival time passes midnight (00:00), add an extra day
       if (arrivalDate.getHours() < departureDate.getHours() || arrivalDate.getDate() > departureDate.getDate()) {
         arrivalDate.setDate(arrivalDate.getDate() + 1);
       }
-
-      // Set arrival time and date
       this.arrivalTime = arrivalDate.toTimeString().split(' ')[0].substring(0, 5); // HH:MM format
       this.arrivalDate = arrivalDate.toISOString().split('T')[0]; // YYYY-MM-DD format
 
@@ -318,9 +311,7 @@ export default {
   }, 
   calculatePrice() {
       if (this.distance && this.numberOfPeople) {
-        // Price per person
         const pricePerPerson = this.distance * this.ratePerKm;
-        // Multiply by the number of people
         this.priceInZAR = (pricePerPerson * this.numberOfPeople).toFixed(2);
       }
     },
@@ -330,7 +321,7 @@ export default {
 
   if (!cityFromData || !cityToData) {
     console.error('Selected city not found in data. Please check the city list.');
-    return; // Exit the function early if either city is not found
+    return; 
   }
 
   const distance = this.haversine(
@@ -345,21 +336,16 @@ export default {
 },
         haversine(lat1, lon1, lat2, lon2) {
             const toRadians = (degrees) =>  degrees * (Math.PI / 180);
-            // Radius of the Earth in kilometers
             const R = 6371.0;
-            // Convert latitude and longitude from degrees to radians
             const lat1Rad = toRadians(lat1);
             const lon1Rad = toRadians(lon1);
             const lat2Rad = toRadians(lat2);
             const lon2Rad = toRadians(lon2);
-            // Differences in coordinates
             const dLat = lat2Rad - lat1Rad;
             const dLon = lon2Rad - lon1Rad;
-            // Haversine formula
             const a = Math.sin(dLat / 2) ** 2 +
                       Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            // Distance in kilometers
             return R * c;
            
 
@@ -384,31 +370,73 @@ export default {
 </script>
 
 <style scoped>
-.modal-content{
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.spinner-container {
+  text-align: center;
+  background: white; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.4em;
+}
+
+.checkout-icon-container {
+  margin-top: 10px;
+}
+
+.bi{
+  font-size: 4rem;
+  color: #28a745; 
+}
+
+p {
+  font-size: 1.25rem;
+  color: #343a40;
+  margin-top: 10px;
+}
+.modal-content {
   background-color: #001f31;
 }
-.paragraph{
+.paragraph {
   color: white;
   font-size: 1rem;
 }
-#select{
+#select {
   padding-top: 2rem;
 }
-.booking-result{
-  border: 2px solid #7ddff1; 
-  width: 300px;
-  background-image: linear-gradient(to right, #7ddff1, #001f31, #7ddff1,#001f31);
-  margin-inline-start: 40rem;
+.booking-result {
+  border: 2px solid #7ddff1;
+  width: 100%;
+  max-width: 300px;
+  background-image: linear-gradient(to right, #7ddff1, #001f31, #7ddff1, #001f31);
+  margin: 1rem auto;
 }
-
+form {
+  padding: 2rem;
+}
 label {
   color: #7ddff1;
 }
-.date {
-  width: 480px;
-}
-.dropdown {
-  width: 480px;
+.date, .dropdown {
+  width: 100%;
 }
 option {
   background-color: #001f31;
@@ -427,9 +455,8 @@ option {
   background-color: #7ddff1;
   color: #001f31;
 }
-
 .ticket {
-  background-color: #001f31;
+  background-color: transparent;
   padding-bottom: 3rem;
   color: white;
 }
@@ -439,22 +466,23 @@ h1 {
   text-shadow: 2px 2px 5px #7ddff1;
 }
 form {
-  background-color: #001f31;
+  background-color: transparent;
   padding-top: 3rem;
-}
-.container-fluid {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  gap: 2rem;
 }
 button {
   margin-bottom: 1.5rem;
-  width: 150px;
+  width: 100%; 
+  max-width: 150px; 
   height: 3rem;
 }
 .container-fluid {
   background-color: #001f31;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  gap: 2rem;
+  margin: 0 auto; 
 }
 :is(input, select) {
   height: 2rem;
@@ -463,7 +491,6 @@ button {
   border-left: 2px solid #7ddff1;
   color: white;
 }
-
 .one-way {
   background-color: #7ddff1;
   color: #001f31;
@@ -471,52 +498,82 @@ button {
 }
 #people {
   color: white;
-  width: 480px;
 }
-.submit-button{
-  background-image: linear-gradient(to right,#001f31, #7ddff1, #001f31);
+.submit-button {
+  background-image: linear-gradient(to right, #001f31, #7ddff1, #001f31);
   border: 2px solid #7ddff1;
   color: white;
 }
-@media (max-width: 768px) {
+.btn{
+  background-image: linear-gradient(to right, #001f31, #7ddff1, #001f31);
+  border: 2px solid #7ddff1;
+  color: white;
+  height: 70px;
+}
+
+
+@media (max-width: 1000px) {
   .container-fluid {
-    width: 100%;
     padding: 0 1rem;
   }
   .booking-result {
-    margin-inline-start: 0;
-    width: 100%;
+    width: 100%; 
+    margin: 1rem 0;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 0 0.5rem;
+  }
+  .booking-result {
+    width: 100%; 
+    margin: 0.5rem 0;
   }
   h1 {
     font-size: 2rem;
+  }
+  form{
+    width: 500px;
   }
 }
 
 @media (max-width: 500px) {
   button {
     width: 100%;
+    height: 2.5rem;
   }
   h1 {
     font-size: 1.5rem;
   }
+  form{
+    width: 400px;
+  }
 }
+@media (max-width: 400px) {
+  form{
+    width: 300px;
+  }
+}
+
 
 @media (max-width: 300px) {
   .container-fluid {
-    width: 100%;
     padding: 0.5rem;
     gap: 1rem;
   }
   .booking-result {
     width: 100%;
+    max-width: none;
   }
   h1 {
     font-size: 1.2rem;
-    padding: 0;
   }
   button {
-    width: 100%;
-    height: 2.5rem;
+    height: 2rem; 
   }
 }
 </style>

@@ -23,7 +23,7 @@ img[alt='icon'] {
   aspect-ratio: 1;
   object-fit: cover;
   position: absolute;
-  top: 0;
+  top: 4rem;
   right: 0;
   box-shadow: 2px 2px 5px#7ddff1;
 }
@@ -40,8 +40,7 @@ img[alt='icon'] {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    background-image: url('https://t3.ftcdn.net/jpg/02/16/49/46/360_F_216494639_uZ0e27KMsl5qyKFXiZDTGUPO7bcMxCeh.jpg');
-    /* background-image: url('https://static.vecteezy.com/system/resources/thumbnails/033/097/604/small_2x/colorful-car-light-trails-long-exposure-at-night-ai-generative-photo.jpg'); */
+    background-image: url('https://yakuphantonintshi.github.io/myimages/Images/my_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     
@@ -71,6 +70,10 @@ img[alt='icon'] {
 }
 #navBar:hover{
     text-decoration: underline;
+}
+main{
+  padding-top: 3rem;
+  border-top: 1px solid #7ddff1;
 }
 
 /* footer{

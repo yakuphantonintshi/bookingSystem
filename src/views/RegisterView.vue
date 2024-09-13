@@ -29,6 +29,15 @@
         <label for="age" class="age">Age: <br>
           <input type="number" v-model="payload.age" class="ageInp" id="age" required>
         </label>
+        <br>
+        <label class="age">PROFILE URL</label> <br>
+        <input class="input" type="image-url"> <br>
+
+        <label class="age">USER ROLE:</label> <br>
+        <input class="input" type="text"> <br>
+
+        <label class="age">PHONE NUMBER:</label> <br>
+        <input class="input" type="number">
   
         <p>Create your password</p>
         <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required>
@@ -46,7 +55,8 @@
   
   <script>
 import store from '@/store';
-
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
   export default {
     data() {
       return {
@@ -57,7 +67,9 @@ import store from '@/store';
           gender: "",
           age: 0,
           pwd: "",
-          errorMessage: ''
+          errorMessage: '',
+          userProfile: '',
+          phone: ''
       }
       };
     },
@@ -83,9 +95,11 @@ import store from '@/store';
             email: this.payload.email,
             gender: this.payload.gender,
             age: this.payload.age,
-            pwd: this.payload.pwd
+            pwd: this.payload.pwd,
+            userProfile: this.payload.userProfile
           }
           
+         
           return store.dispatch('register', cred)
         }
       ,

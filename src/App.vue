@@ -21,7 +21,7 @@ export default {
       return this.$route.meta.navbarColor || '#333';
     },
     showNavbar() {
-      const visibleNavbarRoutes = ['about', 'offices', 'tickets', 'faq', 'contact', 'bookingSummary', 'routes','RouteDetails', 'adminView'];
+      const visibleNavbarRoutes = ['about', 'offices', 'tickets', 'faq', 'contact', 'bookingSummary', 'routes','RouteDetails', 'adminView', 'home', 'Profile', 'questions', 'login', 'admin'];
       return visibleNavbarRoutes.includes(this.$route.name);
     },
   },

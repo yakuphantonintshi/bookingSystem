@@ -10,7 +10,7 @@ const {cookies} = useCookies()
 applyToken(cookies.get('legitUser')?.token)
 
 // const apiURL = 'http://localhost:3001/'
-const apiURL = "http://localhost:3001/"
+const apiURL = "https://bookingsystem-qbd3.onrender.com/"
 
 const test = "here"
 console.log(test);

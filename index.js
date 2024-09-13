@@ -1,6 +1,7 @@
 import { userRouter, express } from "./Controller/UserController.js";
 import { cityRouter} from "./Controller/DepartureController.js"
 import { townRouter} from "./Controller/TravellingController.js"
+import { bookingsRouter } from "./Controller/Bookings.js";
 import {freestateRouter, gautengRouter, KznRouter, northenRouter, officeRouter, westernRouter } from "./Controller/OfficeController.js";
 import path from "path";
 import cors from 'cors'
@@ -33,6 +34,7 @@ app.use('/northern', northenRouter )
 app.use('/western', westernRouter )
 app.use('/departure', cityRouter)
 app.use('/travelling', townRouter)
+app.use('/bookings', bookingsRouter)
 
 app.use(
   express.static("./static"),

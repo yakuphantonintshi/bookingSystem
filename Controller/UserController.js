@@ -19,6 +19,8 @@ userRouter.post('/register', (req, res) => {
 })
 
 userRouter.patch('/:id', (req, res) => {
+    console.log();
+    
     users.updateUser(req,res)
 })
 

@@ -80,20 +80,62 @@ async updateUser(req, res) {
     try {
         let data = req.body;
         if (data.pwd) {
-          data.pwd = await hash(data.pwd, 12);
-        }
-        const strQry = `
-            UPDATE Users 
-            SET ?
-            WHERE userID = ${req.params.id}
-            `;
-        db.query(strQry, [data], (err) => {
-          if (err) throw new Error("Unable to update a user");
+          const strQry = `
+                select pwd
+                from Users
+                where userID = ${req.params.id}
+                `;
+          db.query(strQry, async (error, result)=>{
+            if (error) throw new Error(error.message);
+              if (req.body.pwd == result[0].pwd) {
+                console.log('same pwd');
+                const Query = `
+                  update Users
+                  set ?
+                  where userID = ${req.params.id}
+                  `;
+                db.query(Query, [data], (err) => {
+                  if (err) throw new Error(err.message);
+                  res.json({
+                    status: res.statusCode,
+                    msg: 'User details updated successfully :arrows_counterclockwise:',
+                  })
+                })
+                return 'same pwd'
+              } else{
+                console.log(req.body.pwd);
+                console.log(result[0].pwd);
+                data.pwd = await hash(data.pwd, 12)
+                const Query = `
+                  update Users
+                  set ?
+                  where userID = ${req.params.id}
+                  `;
+                db.query(Query, [data], (err) => {
+                  if (err) throw new Error(err.message);
+                  res.json({
+                    status: res.statusCode,
+                    msg: 'User details updated successfully :arrows_counterclockwise:',
+                  })
+                })
+              }
+          })
+        } else{
+        const Query = `
+        update Users
+        set ?
+        where userID = ${req.params.id}
+        `;
+        db.query(Query, [data], (err) => {
+          if (err) throw new Error(err.message);
           res.json({
             status: res.statusCode,
-            msg: "The user record was updated",
-          });
-        });
+            msg: 'User details updated successfully :arrows_counterclockwise:',
+          })
+        })
+        }
+
+
       } catch (e) {
         res.json({
           status: 400,

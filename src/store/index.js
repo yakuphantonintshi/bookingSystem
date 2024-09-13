@@ -9,8 +9,8 @@ const {cookies} = useCookies()
 
 applyToken(cookies.get('legitUser')?.token)
 
-const apiURL = 'http://localhost:3001/'
-// const apiURL = "http://localhost:3001/"
+// const apiURL = 'http://localhost:3001/'
+const apiURL = "http://localhost:3001/"
 
 const test = "here"
 console.log(test);

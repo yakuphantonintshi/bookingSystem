@@ -22,7 +22,13 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(cors())
+app.use(cors({
+  origin: '*',
+  credentials: true,
+  methods: '*',
+  allowedHeaders: '*',
+  exposedHeaders: ['Authorization']
+}));
 
 
 app.use('/users', userRouter )

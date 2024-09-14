@@ -1,7 +1,11 @@
 <template>
     <div class="everything">
         <h1>Route Details</h1>
+<<<<<<< HEAD
         <div v-if="route" class="routeOne vh-100">
+=======
+        <div v-if="route" class="routeOne dvh-100">
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <div class="card">
           <div class="card-header">
             <h5>{{ route.Depname }} to {{ route.ArriName }}</h5>
@@ -98,14 +102,21 @@ export default {
 </script>
 
   
+<<<<<<< HEAD
   <style scoped>
  .book{
+=======
+
+ <style scoped>
+  .book {
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     background-color: #7ddff1;
     border-radius: .8rem;
     width: 15rem;
     height: 3rem;
     margin: 1rem;
     margin-top: 2rem;
+<<<<<<< HEAD
  }
  input{
     margin-block: 1rem;
@@ -147,24 +158,186 @@ export default {
     justify-content: center;
     align-items: center;
   }
+=======
+  }
+
+  input {
+    margin-block: 1rem;
+  }
+
+  .checkout {
+    background-color: #7ddff1;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.4em;
+  }
+
+  .checkout-icon-container {
+    margin-top: 10px;
+  }
+
+  .bi {
+    font-size: 4rem;
+    color: #28a745;
+  }
+
+  .booking-details {
+    border: 3px solid #7ddff1;
+    margin: 20px;
+    font-size: 1.7rem;
+    padding: 1rem;
+
+  }
+
+  .everything {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    color: white;
+  }
+
+  .routeOne {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   .card {
     background-color: #001f31;
     color: white;
     border: 2px solid #7ddff1;
+<<<<<<< HEAD
     /* padding: 20px; */
     /* margin-top: -300px; */
     width: 500px;
     /* height: 300px; */
   }
+=======
+    width: 500px;
+    margin-bottom: 1rem;
+  }
+
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   .card-header {
     background-color: #7ddff1;
     color: #001f31;
   }
+<<<<<<< HEAD
   h1{
     color: white;
   padding-top: 5px;
   font-weight: bold;
   text-shadow: 3px 3px 5px #7ddff1;
   }
+=======
+
+  h1 {
+    color: white;
+    padding-top: 5px;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px #7ddff1;
+    text-align: center;
+  }
+
+  @media (max-width: 1000px) {
+    .card {
+      width:400px;;
+    }
+    .booking-details {
+      font-size: 1.5rem;
+    }
+    .book, .checkout {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .card {
+      width: 400px;
+    }
+    .booking-details {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+    .booking-details {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    .card {
+      width: 300px;
+      margin-bottom: 2rem;
+    }
+    .book, .checkout {
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    .card {
+      width: 300px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+    .booking-details {
+      font-size: 1rem;
+    }
+    .card {
+      width: 200px;
+      margin-bottom: 1rem;
+    }
+    .book, .checkout {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 300px) {
+    h1 {
+      font-size: 1.2rem;
+    }
+    .card {
+      width: 200px;
+      margin-bottom: 1rem;
+    }
+    .book, .checkout {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.8rem;
+    }
+    .booking-details {
+      font-size: 0.9rem;
+    }
+    input {
+      width: 100%;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+    .bi {
+      font-size: 3rem;
+    }
+  }
+
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   </style>
   

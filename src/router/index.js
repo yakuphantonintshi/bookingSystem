@@ -12,17 +12,31 @@ import AdminView from '@/views/AdminView.vue'
 import BookingSummary from '@/views/BookingSummary.vue'
 import Routes from '@/views/Routes.vue'
 import RouterOne from '@/views/RouterOne.vue'
+<<<<<<< HEAD
+=======
+import ProfileView from '@/views/ProfileView.vue'
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 const routes = [
   {
     path: '/',
     name: 'home',
+<<<<<<< HEAD
     component: HomeView
+=======
+    component: HomeView,
+    meta: { navbarColor: 'transparent'}
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   },
   {
     path: '/login',
     name: 'login',
+<<<<<<< HEAD
     component: LoginView
+=======
+    component: LoginView,
+    meta: { navbarColor: 'transparent'}
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   },
   {
     path: '/register',
@@ -33,7 +47,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView,
+<<<<<<< HEAD
     meta: { navbarColor: '#001f31'}
+=======
+    meta: { navbarColor: 'transparent'}
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   },
   {
     path: '/offices',
@@ -65,7 +83,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminLogin,
+<<<<<<< HEAD
     meta: { navbarColor: '#001f31'}
+=======
+    meta: { navbarColor: 'transparent'}
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   },
   {
 
@@ -91,7 +113,17 @@ const routes = [
      component: RouterOne, 
      props: true,
      meta: { navbarColor: '#001f31'}
+<<<<<<< HEAD
      },
+=======
+  },
+  { 
+    path: '/profile', 
+    name: 'Profile',
+    component: ProfileView, 
+    meta: { navbarColor: '#001f31'}
+  },
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 ]
 

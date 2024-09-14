@@ -1,6 +1,10 @@
 <template>
     <h1>YOUR BOOKING DETAILS:</h1>
+<<<<<<< HEAD
     <div v-if="isResultsDiplayed" class="container-fluid vh-100">
+=======
+    <div v-if="isResultsDiplayed" class="container-fluid dvh-100">
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
          <p class="booking-details">
       <table>

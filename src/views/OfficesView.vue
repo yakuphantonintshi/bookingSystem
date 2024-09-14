@@ -226,7 +226,11 @@ export default {
   color: #7ddff1;
 }
 .container-fluid {
+<<<<<<< HEAD
   background-color: #001f31;
+=======
+  background-color: transparent;
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   background-size: cover;
   background-position: center;
 }

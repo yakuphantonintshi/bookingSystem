@@ -29,6 +29,18 @@
         <label for="age" class="age">Age: <br>
           <input type="number" v-model="payload.age" class="ageInp" id="age" required>
         </label>
+<<<<<<< HEAD
+=======
+        <br>
+        <label class="age">PROFILE URL</label> <br>
+        <input class="input" type="image-url"> <br>
+
+        <label class="age">USER ROLE:</label> <br>
+        <input class="input" type="text"> <br>
+
+        <label class="age">PHONE NUMBER:</label> <br>
+        <input class="input" type="number">
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   
         <p>Create your password</p>
         <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required>
@@ -46,7 +58,12 @@
   
   <script>
 import store from '@/store';
+<<<<<<< HEAD
 
+=======
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   export default {
     data() {
       return {
@@ -57,7 +74,13 @@ import store from '@/store';
           gender: "",
           age: 0,
           pwd: "",
+<<<<<<< HEAD
           errorMessage: ''
+=======
+          errorMessage: '',
+          userProfile: '',
+          phone: ''
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
       }
       };
     },
@@ -83,9 +106,17 @@ import store from '@/store';
             email: this.payload.email,
             gender: this.payload.gender,
             age: this.payload.age,
+<<<<<<< HEAD
             pwd: this.payload.pwd
           }
           
+=======
+            pwd: this.payload.pwd,
+            userProfile: this.payload.userProfile
+          }
+          
+         
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
           return store.dispatch('register', cred)
         }
       ,
@@ -189,5 +220,104 @@ margin-block: 2rem;
   width: 500px;
  }
 }
+<<<<<<< HEAD
+=======
+@media screen and (max-width: 700px) {
+  .container-fluid {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container-fluid {
+    width: 90%;
+  }
+
+  .bi {
+    font-size: 3rem;
+    margin-left: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 90%;
+    margin-left: 0;
+  }
+
+  button {
+    width: 90%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .bi {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .bi {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .input, .ageInp, .inp {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  button {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .register {
+    width: 100%;
+  }
+}
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 </style>

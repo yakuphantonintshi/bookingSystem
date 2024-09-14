@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
     <div class="questions vh-100">
+=======
+    <div class="questions dvh-100">
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <h1>FREQUENTLY ASKED QUESTIONS</h1>
 
         <h3>Booking, rebooking and cancellation</h3>
@@ -128,12 +132,20 @@ h3{
 }
 
 .questions{
+<<<<<<< HEAD
     background-color: #001f31;
+=======
+    background-color: transparent;
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 .btn{
     background-color: #001f31;
     margin-inline: 2rem;
     border: 2px solid #7ddff1;
+<<<<<<< HEAD
+=======
+    height: 5rem;
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 .btn:hover{
     background-color: #7ddff1;
@@ -143,4 +155,104 @@ h3{
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+<<<<<<< HEAD
+=======
+@media (max-width: 1000px) {
+    .btn {
+      margin-inline: 0.5rem; /* Reduce margin for medium screens */
+      height: 4.5rem; /* Slightly smaller button height */
+    }
+
+    .questions {
+      padding: 1.5rem; /* Reduce padding for medium screens */
+    }
+  }
+
+  @media (max-width: 800px) {
+    .btn {
+      margin-inline: 0.3rem; /* Further reduce margin */
+      height: 4rem; /* Smaller button height */
+      font-size: 0.9rem; /* Adjust font size for better fit */
+    }
+
+    .questions {
+      padding: 1rem; /* Further reduce padding */
+    }
+
+    .row {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem; /* Adjust margin for vertical layout */
+    }
+
+    .col {
+      margin-bottom: 1rem; /* Space between collapsed items */
+    }
+  }
+
+  @media (max-width: 600px) {
+    .btn {
+      height: 3.5rem; /* Smaller button height */
+      font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .questions {
+      padding: 0.5rem; /* Minimal padding */
+    }
+
+    .row {
+      margin-top: 0.5rem; /* Reduced margin */
+    }
+
+    .col {
+      margin-bottom: 0.5rem; /* Reduced space between items */
+    }
+
+    h1 {
+      font-size: 1.8rem; /* Adjust font size */
+    }
+
+    h3 {
+      font-size: 1.2rem; /* Adjust font size */
+    }
+  }
+
+  @media (max-width: 400px) {
+    .btn {
+      height: 3rem; /* Further reduce button height */
+      font-size: 0.7rem; /* Smaller font size */
+    }
+
+    .questions {
+      padding: 0.3rem; /* Minimal padding */
+    }
+
+    h1 {
+      font-size: 1.5rem; /* Smaller font size */
+    }
+
+    h3 {
+      font-size: 1rem; /* Smaller font size */
+    }
+  }
+
+  @media (max-width: 300px) {
+    .btn {
+      height: 2.5rem; /* Smallest button height */
+      font-size: 0.6rem; /* Smallest font size */
+    }
+
+    .questions {
+      padding: 0.2rem; /* Minimal padding */
+    }
+
+    h1 {
+      font-size: 1.2rem; /* Smallest font size */
+    }
+
+    h3 {
+      font-size: 0.8rem; /* Smallest font size */
+    }
+  }
+>>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 </style>

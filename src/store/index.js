@@ -1,36 +1,24 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
-<<<<<<< HEAD
-import { useCookies } from 'vue3-cookies'
-import 'vue3-toastify/dist/index.css'
-=======
 import 'vue3-toastify/dist/index.css'
 import { useCookies } from 'vue3-cookies'
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 import { applyToken } from '@/service/AuthenticateUser.js'
 import router from '@/router'
 const {cookies} = useCookies()
 
 applyToken(cookies.get('legitUser')?.token)
 
-<<<<<<< HEAD
-const apiURL = 'http://localhost:3001/'
-=======
 // const apiURL = 'http://localhost:3001/'
 const apiURL = "https://bookingsystem-qbd3.onrender.com/"
 
 const test = "here"
 console.log(test);
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 
 export default createStore({
   state: {
-<<<<<<< HEAD
-=======
     bookings: null,
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     users: null,
     user: null,
       password: '',
@@ -62,15 +50,9 @@ export default createStore({
     },
   
   mutations: {
-<<<<<<< HEAD
-    updateBooking(state, bookingData) {
-      Object.assign(state, bookingData);
-    },
-=======
     // updateBooking(state, bookingData) {
     //   Object.assign(state, bookingData);
     // },
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     displayResults(state, value) {
       state.isResultsDiplayed = value;
     },
@@ -83,15 +65,12 @@ export default createStore({
         state.users.splice(index, 1, updatedUser);
       }
     },
-<<<<<<< HEAD
-=======
     updateBookingInState(state, updatedBooking) {
       const index = state.bookings.findIndex(booking => booking.bookingID === updatedBooking.bookingID);
       if (index !== -1) {
         state.bookings.splice(index, 1, updatedUser);
       }
     },
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     setEastern(state, payload) {
       state.eastern = payload
     },
@@ -118,12 +97,9 @@ export default createStore({
     },
     setUser(state, value){
       state.travelling = value
-<<<<<<< HEAD
-=======
     },
     setBookings(state, value){
       state.bookings = value
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     }
   },
   actions: {
@@ -151,8 +127,6 @@ export default createStore({
         })
       }
     },
-<<<<<<< HEAD
-=======
     async fetchBookings(context) {
       try {
         const response = await axios.get(`${apiURL}bookings`)
@@ -173,7 +147,6 @@ export default createStore({
         })
       }
     },
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     async fetchDeparture(context) {
       try {
         const response = await axios.get(`${apiURL}departure/`)
@@ -217,15 +190,7 @@ export default createStore({
     async register(context, payload){
       try {
         const { token, msg } = await (await axios.post(`${apiURL}users/register`, payload)).data
-        console.log(token);
         if (token) {
-<<<<<<< HEAD
-          context.dispatch('fetchUsers')
-          toast.success(`New user has been added. Thank you🤓`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER
-          })
-=======
           toast.success(`New user has been added. Thank you🤓`, {
             autoClose: 5000,
             position: toast.POSITION.TOP_CENTER
@@ -234,7 +199,6 @@ export default createStore({
             router.push({name : 'login'})
           }, 3000);
 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -273,22 +237,23 @@ export default createStore({
     },
     async fetchEastern(context) {
       try {
-        const response = await axios.get(`${apiURL}eastern/`)
-        const {results} = response.data
-        console.log(results.results)
+        const response = await axios.get(`${apiURL}eastern/`);
+        const { results } = response.data;
+        console.log(response.data);
+        
         if (results) {
-          context.commit('setEastern', results)
+          context.commit('setEastern', results);
         } else {
-          toast.error(`${msg}`, {
+          toast.error('No results found', {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
-          })
+          });
         }
       } catch (e) {
-        toast.error(`${e.message}`, {
+        toast.error(`Error: ${e.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
-        })
+        });
       }
     },
     async fetchWestern(context) {
@@ -410,8 +375,6 @@ export default createStore({
       console.log("Failed to update user:", error);
       throw new Error("Failed to update user.");
     }
-<<<<<<< HEAD
-=======
   },
   async updateBooking({ commit }, { id, updateBooking }) {
     try {
@@ -425,7 +388,6 @@ export default createStore({
       console.log("Failed to update booking:", error);
       throw new Error("Failed to update booking.");
     }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   }
 
   },

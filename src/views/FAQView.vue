@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-    <div class="questions vh-100">
-=======
     <div class="questions dvh-100">
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <h1>FREQUENTLY ASKED QUESTIONS</h1>
 
         <h3>Booking, rebooking and cancellation</h3>
@@ -132,20 +128,13 @@ h3{
 }
 
 .questions{
-<<<<<<< HEAD
-    background-color: #001f31;
-=======
     background-color: transparent;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 .btn{
     background-color: #001f31;
     margin-inline: 2rem;
     border: 2px solid #7ddff1;
-<<<<<<< HEAD
-=======
     height: 5rem;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 .btn:hover{
     background-color: #7ddff1;
@@ -155,8 +144,6 @@ h3{
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-<<<<<<< HEAD
-=======
 @media (max-width: 1000px) {
     .btn {
       margin-inline: 0.5rem; /* Reduce margin for medium screens */
@@ -254,5 +241,4 @@ h3{
       font-size: 0.8rem; /* Smallest font size */
     }
   }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 </style>

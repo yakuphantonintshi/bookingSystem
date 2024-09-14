@@ -13,46 +13,6 @@
     <div class="row">
       <div class="col">
         <form action="https://formspree.io/f/xdknjdbj" method="POST">
-<<<<<<< HEAD
-          <input
-            type="text"
-            placeholder="Enter your name"
-            id="name"
-            name="name"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="+27 000 000 000"
-            id="number"
-            name="phone"
-          />
-
-          <input
-            type="email"
-            placeholder="example@gmail.com"
-            id="email"
-            name="email"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Enter the subject"
-            id="subject"
-            name="subject"
-          />
-          <textarea
-            name="message"
-            id="message"
-            rows="5"
-            placeholder="Message"
-          ></textarea>
-          <br />
-          <button type="submit">SUBMIT</button>
-        </form>
-      </div>
-      <div class="col">
-=======
   <input
     type="text"
     placeholder="Enter your name"
@@ -87,7 +47,6 @@
 </form>
       </div>
       <div class="col" id="column">
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <div class="card mb-3" style="max-width: 540px">
           <div class="row g-0">
             <div class="col-md-4">
@@ -171,12 +130,6 @@ input {
   box-shadow: 4px 4px 7px #7ddff1;
   color: white;
 }
-<<<<<<< HEAD
-textarea {
-  width: 400px;
-  background-color: transparent;
-  /* border: 2px solid #7ddff1; */
-=======
 #column{
   margin-left: 9rem;
 }
@@ -185,18 +138,10 @@ input, textarea {
   width: 100%; /* Full width within grid cells */
   background-color: transparent;
   border: 2px solid #7ddff1;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   border-bottom: 2px solid #7ddff1;
   border-right: 2px solid #7ddff1;
   box-shadow: 4px 4px 7px #7ddff1;
   color: white;
-<<<<<<< HEAD
-}
-button {
-  width: 250px;
-  height: 60px;
-  margin-left: 7rem;
-=======
   padding: 0 0.5rem; /* Add padding inside inputs */
 }
 textarea {
@@ -206,17 +151,11 @@ textarea {
 button {
   width: 100%; /* Full width within grid cell */
   height: 60px;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   margin-top: 1rem;
   background-color: #7ddff1;
   color: #001f31;
   border: 2px solid #001f31;
   box-shadow: 4px 4px 7px #7ddff1;
-<<<<<<< HEAD
-}
-form {
-  margin-top: 2rem;
-=======
   grid-column: span 2; /* Span across two columns */
 }
 
@@ -229,7 +168,6 @@ form {
   border: 2px solid #7ddff1;
   border-radius: 5px; /* Optional: add border-radius for rounded corners */
 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 :is(#card-title, #card-text) {
   color: #001f31;
@@ -259,11 +197,7 @@ form {
   color: white;
 }
 .container-fluid {
-<<<<<<< HEAD
-  background-color: #001f31;
-=======
   background-color: transparent;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 h1 {
   text-shadow: 2px 2px 5px #7ddff1;
@@ -273,8 +207,4 @@ h3 {
   padding-top: 1rem;
   text-shadow: 2px 2px 5px #7ddff1;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 </style>

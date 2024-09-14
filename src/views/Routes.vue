@@ -126,9 +126,6 @@ input{
     border: 1.3px solid black;
     padding-inline-start: 1rem;
 }
-<<<<<<< HEAD
-
-=======
 @media (max-width: 930px) {
   .routes {
     margin-right: 2rem;
@@ -237,5 +234,4 @@ input{
     font-size: 0.9rem;
   }
 }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 </style>

@@ -1,34 +1,10 @@
 <template>
     <div class="container-fluid dvh-100">
-<<<<<<< HEAD
-      <button type="button" class="add btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD A NEW USER</button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-    ...
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-  </div>
-</div>
-</div>
-</div>
-=======
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <h1>USER TABLE</h1>
   <div class="table">
     <table  v-if="users?.length">
         <tr>
-<<<<<<< HEAD
-=======
         <th>PROFILE</th>
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <th>USER_ID</th>
         <th>USER_NAME</th>
         <th>USER AGE</th>
@@ -41,10 +17,7 @@
     </tr>
 
     <tr v-for="user in users" :key="user.userID">
-<<<<<<< HEAD
-=======
       <td><img :src=user.userProfile alt="picture"></td>
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         <td>{{ user.userID}}</td>
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
@@ -115,8 +88,6 @@
         <SpinnerComp />
     </div>
   </div>
-<<<<<<< HEAD
-=======
   <h1>BOOKING TABLE</h1>
   <div class="table">
     <table  v-if="bookings?.length">
@@ -201,7 +172,6 @@
         <SpinnerComp />
     </div>
   </div>
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     </div>
 
             
@@ -216,33 +186,22 @@ export default{
     return{
 
       editableUser: {},
-<<<<<<< HEAD
-=======
       editBooking: {},
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     }
   },
     components: {
         SpinnerComp
     },
     computed: {
-<<<<<<< HEAD
-        ...mapState(["users"])
-=======
         ...mapState(["users", "bookings"])
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         
     },
     methods: {
       openEditModal(user) {
-<<<<<<< HEAD
-      this.editableUser = { ...user }; // Create a copy of the selected user for editing
-=======
       this.editableUser = { ...user };
     },
     openModal(booking) {
       this.editBooking = { ...booking}
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     },
 
     async saveChanges() {
@@ -258,11 +217,6 @@ export default{
       alert("Failed to update user.");
     }
   },
-<<<<<<< HEAD
-        async getUsers() {
-            await this.$store.dispatch("fetchUsers")
-        },
-=======
   async saveChangess() {
   try {
     await this.$store.dispatch("updateBooking", {
@@ -283,7 +237,6 @@ export default{
         async getBookings() {
           await this.$store.dispatch("fetchBookings")
         },
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
         deleteUser(id) {
       if (confirm("are you sure you want to delete this user")) {
         this.$store.dispatch("deleteUser", { id: id });
@@ -295,10 +248,7 @@ export default{
     },
     mounted(){
         this.getUsers();
-<<<<<<< HEAD
-=======
         this.getBookings();
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     }
 }
 </script>
@@ -377,11 +327,8 @@ th{
     background-color: transparent;
     border: 2px solid #7ddff1;
 }
-<<<<<<< HEAD
-=======
 img{
   width: 50px;
 }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 </style>

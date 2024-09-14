@@ -1,132 +1,132 @@
 <template>
-    <form @submit.prevent="validatePasswords">
-      <span class="arrow">
-        <a href="/"><i class="bi bi-arrow-left-circle"></i></a>
-      </span>
-      <div class="container-fluid">
-        <h1>Sign up!</h1>
-        <p>Personal Information</p>
-        <label>
-          <input type="text" class="input" v-model="payload.firstName" name="firstname" placeholder="Enter your firstName" required>
-        </label> <br>
-        <label>
-          <input type="text" class="input" v-model="payload.lastName" name="lastname" placeholder="Enter your lastname" required>
-        </label> <br>
-        <label>
-          <input type="email" class="input" v-model="payload.email" name="email" placeholder="Enter your email address" required>
-        </label> <br>
-  
-        <label class="gender">Gender:
-          <select id="gender" v-model="payload.gender" name="gender" class="dropdown" required>
-            <option value="" disabled selected>Select your gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-            <option value="prefer_not_to_say">Prefer not to say</option>
-          </select>
-        </label> <br>
-  
-        <label for="age" class="age">Age: <br>
-          <input type="number" v-model="payload.age" class="ageInp" id="age" required>
-        </label>
-<<<<<<< HEAD
-=======
-        <br>
-        <label class="age">PROFILE URL</label> <br>
-        <input class="input" type="image-url"> <br>
+  <form @submit.prevent="register">
+    <span class="arrow">
+      <a href="/"><i class="bi bi-arrow-left-circle"></i></a>
+    </span>
+    <div class="container-fluid">
+      <h1>Sign up!</h1>
+      <p>Personal Information</p>
+      <label>
+        <input type="text" class="input" v-model="payload.firstName" name="firstname" placeholder="Enter your first name" required>
+      </label> <br>
+      <label>
+        <input type="text" class="input" v-model="payload.lastName" name="lastname" placeholder="Enter your last name" required>
+      </label> <br>
+      <label>
+        <input type="email" class="input" v-model="payload.email" name="email" placeholder="Enter your email address" required>
+      </label> <br>
 
-        <label class="age">USER ROLE:</label> <br>
-        <input class="input" type="text"> <br>
+      <label class="gender">Gender:
+        <select id="gender" v-model="payload.gender" name="gender" class="dropdown" required>
+          <option value="" disabled>Select your gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+          <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
+      </label> <br>
 
-        <label class="age">PHONE NUMBER:</label> <br>
-        <input class="input" type="number">
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
+      <label for="age" class="age">Age: <br>
+        <input type="number" v-model="payload.age" class="ageInp" id="age" required>
+      </label>
+      <br>
+      <label class="age">PROFILE URL</label> <br>
+      <input class="input" type="text" v-model="payload.userProfile"> <br>
+
+      <label class="age">USER ROLE:</label> <br>
+      <input class="input" type="text" v-model="payload.userRole"> <br>
+
+      <label class="age">PHONE NUMBER:</label> <br>
+      <input class="input" type="tel" v-model="payload.phone" placeholder="Enter your phone number" required>
   
-        <p>Create your password</p>
-        <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required>
-        <input v-model="payload.pwd" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required minlength="8">
+      <p>Create your password</p>
+      <input v-model="newPassword" class="inp" type="password" id="newPassword" name="newPassword" placeholder="New password" required minlength="8">
+      <input v-model="confirmPassword" class="inp" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required minlength="8">
   
-        <div v-if="errorMessage" class="error">
-          {{ errorMessage }}
-        </div>
-  
-        <button type="button" class="register" @click="register()">Register</button>
-        <button @click="AboutPage" type="button">move forward</button>
+      <div v-if="errorMessage" class="error">
+        {{ errorMessage }}
       </div>
-    </form>
-  </template>
   
-  <script>
-import store from '@/store';
-<<<<<<< HEAD
+      <button type="submit" class="register">Register</button>
+    </div>
+  </form>
+</template>
 
-=======
+<script>
+import store from '@/store';
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-  export default {
-    data() {
-      return {
-          payload : {
-          firstName: "",
-          lastName: "",
-          email: "",
-          gender: "",
-          age: 0,
-          pwd: "",
-<<<<<<< HEAD
-          errorMessage: ''
-=======
-          errorMessage: '',
-          userProfile: '',
-          phone: ''
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
+
+export default {
+  data() {
+    return {
+      payload: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        gender: "",
+        age: 0,
+        pwd: "",
+        userProfile: "",
+        userRole: "",
+        phone: ""
+      },
+      newPassword: "",
+      confirmPassword: "",
+      errorMessage: ''
+    };
+  },
+  methods: {
+    validatePhoneNumber() {
+      // Basic validation for phone numbers
+      const phonePattern = /^\+?[1-9]\d{1,14}$/; // Example pattern for international numbers
+      return phonePattern.test(this.payload.phone);
+    },
+    validatePasswords() {
+      if (this.newPassword !== this.confirmPassword) {
+        this.errorMessage = 'Passwords do not match.';
+        return false;
+      } else if (!this.payload.firstName || !this.payload.lastName || !this.payload.email || !this.payload.gender || !this.payload.age || !this.payload.userProfile || !this.payload.userRole || !this.payload.phone) {
+        this.errorMessage = 'Please fill in all required fields.';
+        return false;
+      } else if (!this.validatePhoneNumber()) {
+        this.errorMessage = 'Invalid phone number format.';
+        return false;
+      } else {
+        this.errorMessage = '';
+        return true;
       }
+    },
+    register() {
+      if (!this.validatePasswords()) {
+        return; // Stop registration if validation fails
+      }
+
+      const cred = {
+        firstName: this.payload.firstName,
+        lastName: this.payload.lastName,
+        email: this.payload.email,
+        gender: this.payload.gender,
+        age: this.payload.age,
+        pwd: this.newPassword, // Use the newPassword for registration
+        userProfile: this.payload.userProfile,
+        userRole: this.payload.userRole,
+        phone: this.payload.phone
       };
-    },
-    methods: {
-    AboutPage() {
-      this.$router.push({ name: 'about' });
-    },
-      validatePasswords() {
-        if (this.newPassword !== this.confirmPassword) {
-          this.errorMessage = 'Passwords do not match.';
-        } else if (!this.firstname || !this.lastname || !this.email || !this.gender || !this.dob) {
-          this.errorMessage = 'Please fill in all required fields.';
-        } else {
-          this.errorMessage = '';
+      return store.dispatch('register', cred)
 
-        }
-      },
-        register(){
-
-        const cred = {
-            firstName: this.payload.firstName,
-            lastName: this.payload.lastName,
-            email: this.payload.email,
-            gender: this.payload.gender,
-            age: this.payload.age,
-<<<<<<< HEAD
-            pwd: this.payload.pwd
-          }
-          
-=======
-            pwd: this.payload.pwd,
-            userProfile: this.payload.userProfile
-          }
-          
-         
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-          return store.dispatch('register', cred)
-        }
-      ,
-      LoginPage() {
-        this.$router.push({ name: 'about' });
-      },
-    },
-
-  };
-  </script>
+      // try {
+      //   await store.dispatch('register', cred);
+      //   toast.success('Registration successful!');
+      //   // Redirect or perform other actions on successful registration
+      // } catch (error) {
+      //   toast.error('Registration failed. Please try again.');
+      //   console.error(error);
+      // }
+    }
+  }
+};
+</script>
 
   
 
@@ -220,8 +220,6 @@ margin-block: 2rem;
   width: 500px;
  }
 }
-<<<<<<< HEAD
-=======
 @media screen and (max-width: 700px) {
   .container-fluid {
     width: 500px;
@@ -318,6 +316,5 @@ margin-block: 2rem;
     width: 100%;
   }
 }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 
 </style>

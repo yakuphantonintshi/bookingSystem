@@ -1,356 +1,164 @@
 <template>
-  <form>
-<<<<<<< HEAD
-    <div class="ticket">
-      <h1>BOOK YOUR TICKET!</h1>
-    </div>
-    <button type="button" class="one-way">One way</button>
-    <button @click="toggleDiv" type="button" class="return">Return</button>
+  <div class="main-container">
+    <form class="form dvh-100">
+      <div class="form-container">
+        <div class="form-section vh-100">
+          <div class="ticket">
+            <h1>BOOK YOUR TICKET!</h1>
+          </div>
+          <button type="button" class="one-way">One way</button>
+          <button @click="toggleDiv" type="button" class="return">Return</button>
 
-    <div class="container-fluid dvh-100">
-      <!-- Departure Dropdown -->
-      <div v-if="departure?.length">
-        <label for="From">Departing From:</label>
-        <select
-          id="departure"
-          name="departure"
-          class="dropdown"
-          v-model="selectedDeparture"
-          required
-        >
-          <option value="" disabled selected>Departing from</option>
-          <option
-            v-for="city in departure"
-            :key="city.departureID"
-            :value="city.departureCity"
-          >
-            {{ city.departureCity }}
-          </option>
-        </select>
-      </div>
-      <div v-else>
-        <SpinnerComp />
-      </div>
-
-      <!-- Travelling Dropdown -->
-      <div v-if="travelling?.length">
-        <label for="From">Destination:</label>
-        <select
-          id="travelling"
-          name="travelling"
-          class="dropdown"
-          v-model="selectedTravelling"
-          required
-        >
-          <option value="" disabled selected>Travelling To</option>
-          <option
-            v-for="town in filteredTravelling"
-            :key="town.travellingID"
-            :value="town.travellingCity"
-          >
-            {{ town.travellingCity }}
-          </option>
-        </select>
-      </div>
-      <div v-else>
-        <SpinnerComp />
-      </div>
-      <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
-      <option value="" disabled selected>Number of seats</option>
-      <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
-    </select>
-
-      <input type="date" v-model="selectedDate" class="date" :min="todayDate"
-      @change="validateDate"/>
-
-      <input type="time" v-model="departureTime" class="time"   :min="minTime" 
-      @change="validateTime"/>
-
-
-      <div v-show="isDivVisible" class="hidden-div">
-        <label for="returning-date">Returning Date:</label>
-        <input type="date" class="date" :min="todayDate" v-model="returningDate" @change="validateDate" />
-      </div>
-
-      <button class="submit-button" @click="displayResults()" type="button">Find Tickets</button>
-      <!-- start of the modal -->
-      <div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    </div>
-    <div class="booking-results-grid" 
-      v-if="isResultsDiplayed && selectedDeparture != null && selectedTravelling != null">
-      <div class="booking-result">
-        <h1 class="paragraph" id="select">{{ selectedDeparture }} TO {{ selectedTravelling }}</h1>
-        <p class="paragraph">Distance: {{ distance }} km</p>
-        <div v-if="arrivalTime && selectedDate">
-          <p class="paragraph">
-            Departure Date: {{ formattedDepartureDate }} <br />
-            Estimated Arrival Time: {{ arrivalTime }} <br />
-            Estimated Arrival Date: {{ formattedArrivalDate }}
-          </p>
-        </div>
-        <p class="paragraph"> Number of people travelling: {{ numberOfPeople }}</p>
-        <p class="paragraph">Price: R {{ priceInZAR }}</p>
-        <p v-if="isDivVisible && returningDate" class="paragraph">Returning Date: {{ formattedReturningDate }}</p>
-        
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BookTicket" type="button">BOOK A TICKET</button>
-
-        <div class="modal fade" id="BookTicket" tabindex="-1" aria-labelledby="BookTicketLabel" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="BookTicketLabel">Edit Your Booking</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Editable form values -->
-        <div class="form-group">
-          <label for="modal-departure">Departing From</label>
-          <select id="modal-departure" v-model="selectedDeparture" class="form-control">
-            <option
-              v-for="city in departure"
-              :key="city.departureID"
-              :value="city.departureCity"
-            >
-              {{ city.departureCity }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-travelling">Travelling To</label>
-          <select id="modal-travelling" v-model="selectedTravelling" class="form-control">
-            <option
-              v-for="town in filteredTravelling"
-              :key="town.travellingID"
-              :value="town.travellingCity"
-            >
-              {{ town.travellingCity }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-people">Number of People</label>
-          <select id="modal-people" v-model="numberOfPeople" class="form-control">
-            <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="modal-date">Departure Date</label>
-          <input type="date" id="modal-date" v-model="selectedDate" class="form-control" :min="todayDate" />
-        </div>
-        <div class="form-group">
-          <label for="modal-time">Departure Time</label>
-          <input type="time" id="modal-time" v-model="departureTime" class="form-control" :min="minTime" />
-        </div>
-        <div v-if="isDivVisible" class="form-group">
-          <label for="modal-returning-date">Returning Date</label>
-          <input type="date" id="modal-returning-date" v-model="returningDate" class="form-control" :min="todayDate" />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" @click="confirmBooking">Confirm your booking</button>
-      </div>
-    </div>
-  </div>
-</div>
-      </div>
-    </div>
-  </form>
-  
-</template>
-
-=======
-    <div class="form-container">
-      <div class="form-section">
-        <div class="ticket">
-          <h1>BOOK YOUR TICKET!</h1>
-        </div>
-        <button type="button" class="one-way">One way</button>
-        <button @click="toggleDiv" type="button" class="return">Return</button>
-
-        <div class="container-fluid dvh-100">
-          <!-- Departure Dropdown -->
-          <div v-if="departure?.length">
-            <label for="From">Departing From:</label>
-            <select
-              id="departure"
-              name="departure"
-              class="dropdown"
-              v-model="selectedDeparture"
-              required
-            >
-              <option value="" disabled selected>Departing from</option>
-              <option
-                v-for="city in departure"
-                :key="city.departureID"
-                :value="city.departureCity"
+          <div class="container-fluid dvh-100">
+            <!-- Departure Dropdown -->
+            <div v-if="departure?.length">
+              <label for="From">Departing From:</label>
+              <select
+                id="departure"
+                name="departure"
+                class="dropdown"
+                v-model="selectedDeparture"
+                required
               >
-                {{ city.departureCity }}
-              </option>
-            </select>
-          </div>
-          <div v-else>
-            <SpinnerComp />
-          </div>
+                <option value="" disabled selected>Departing from</option>
+                <option
+                  v-for="city in departure"
+                  :key="city.departureID"
+                  :value="city.departureCity"
+                >
+                  {{ city.departureCity }}
+                </option>
+              </select>
+            </div>
+            <div v-else>
+              <SpinnerComp />
+            </div>
 
-          <!-- Travelling Dropdown -->
-          <div v-if="travelling?.length">
-            <label for="From">Destination:</label>
-            <select
-              id="travelling"
-              name="travelling"
-              class="dropdown"
-              v-model="selectedTravelling"
-              required
-            >
-              <option value="" disabled selected>Travelling To</option>
-              <option
-                v-for="town in filteredTravelling"
-                :key="town.travellingID"
-                :value="town.travellingCity"
+            <!-- Travelling Dropdown -->
+            <div v-if="travelling?.length">
+              <label for="From">Destination:</label>
+              <select
+                id="travelling"
+                name="travelling"
+                class="dropdown"
+                v-model="selectedTravelling"
+                required
               >
-                {{ town.travellingCity }}
-              </option>
+                <option value="" disabled selected>Travelling To</option>
+                <option
+                  v-for="town in filteredTravelling"
+                  :key="town.travellingID"
+                  :value="town.travellingCity"
+                >
+                  {{ town.travellingCity }}
+                </option>
+              </select>
+            </div>
+            <div v-else>
+              <SpinnerComp />
+            </div>
+            <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
+              <option value="" disabled selected>Number of seats</option>
+              <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
             </select>
+
+            <input type="date" v-model="selectedDate" class="date" :min="todayDate"
+              @change="validateDate"/>
+
+            <input type="time" v-model="departureTime" class="time" :min="minTime" 
+              @change="validateTime"/>
+
+            <div v-show="isDivVisible" class="hidden-div">
+              <label for="returning-date">Returning Date:</label>
+              <input type="date" class="date" :min="todayDate" v-model="returningDate" @change="validateDate" />
+            </div>
+
+            <button class="submit-button" @click="displayResults()" type="button">Find Tickets</button>
           </div>
-          <div v-else>
-            <SpinnerComp />
+        </div>
+      </div>
+    </form>
+
+    <!-- Results Section -->
+    <div class="result-section" v-if="isResultsDiplayed && selectedDeparture && selectedTravelling">
+      <div class="booking-results-grid">
+        <div class="booking-result">
+          <h1 class="paragraph" id="select">{{ selectedDeparture }} TO {{ selectedTravelling }}</h1>
+          <p class="paragraph">Distance: {{ distance }} km</p>
+          <div v-if="arrivalTime && selectedDate">
+            <p class="paragraph">
+              Departure Date: {{ formattedDepartureDate }} <br />
+              Estimated Arrival Time: {{ arrivalTime }} <br />
+              Estimated Arrival Date: {{ formattedArrivalDate }}
+            </p>
           </div>
-          <select id="people" name="people" class="dropdown" v-model="numberOfPeople" @change="calculatePrice" required>
-            <option value="" disabled selected>Number of seats</option>
-            <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
-          </select>
+          <p class="paragraph"> Number of people travelling: {{ numberOfPeople }}</p>
+          <p class="paragraph">Price: R {{ priceInZAR }}</p>
+          <p v-if="isDivVisible && returningDate" class="paragraph">Returning Date: {{ formattedReturningDate }}</p>
 
-          <input type="date" v-model="selectedDate" class="date" :min="todayDate"
-            @change="validateDate"/>
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#BookTicket" type="button">BOOK A TICKET</button>
 
-          <input type="time" v-model="departureTime" class="time"   :min="minTime" 
-            @change="validateTime"/>
-
-          <div v-show="isDivVisible" class="hidden-div">
-            <label for="returning-date">Returning Date:</label>
-            <input type="date" class="date" :min="todayDate" v-model="returningDate" @change="validateDate" />
-          </div>
-
-          <button class="submit-button" @click="displayResults()" type="button">Find Tickets</button>
-          <!-- start of the modal -->
-          <div class="modal" tabindex="-1">
+          <div class="modal fade" id="BookTicket" tabindex="-1" aria-labelledby="BookTicketLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
+                  <h1 class="modal-title fs-5" id="BookTicketLabel">Edit Your Booking</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <p>Modal body text goes here.</p>
+                  <div class="form-group">
+                    <label for="modal-departure">Departing From</label>
+                    <select id="modal-departure" v-model="selectedDeparture" class="form-control">
+                      <option
+                        v-for="city in departure"
+                        :key="city.departureID"
+                        :value="city.departureCity"
+                      >
+                        {{ city.departureCity }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-travelling">Travelling To</label>
+                    <select id="modal-travelling" v-model="selectedTravelling" class="form-control">
+                      <option
+                        v-for="town in filteredTravelling"
+                        :key="town.travellingID"
+                        :value="town.travellingCity"
+                      >
+                        {{ town.travellingCity }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-people">Number of People</label>
+                    <select id="modal-people" v-model="numberOfPeople" class="form-control">
+                      <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-date">Departure Date</label>
+                    <input type="date" id="modal-date" v-model="selectedDate" class="form-control" :min="todayDate" />
+                  </div>
+                  <div class="form-group">
+                    <label for="modal-time">Departure Time</label>
+                    <input type="time" id="modal-time" v-model="departureTime" class="form-control" :min="minTime" />
+                  </div>
+                  <div v-if="isDivVisible" class="form-group">
+                    <label for="modal-returning-date">Returning Date</label>
+                    <input type="date" id="modal-returning-date" v-model="returningDate" class="form-control" :min="todayDate" />
+                  </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="result-section" v-if="isResultsDiplayed && selectedDeparture != null && selectedTravelling != null">
-        <div class="booking-results-grid">
-          <div class="booking-result">
-            <h1 class="paragraph" id="select">{{ selectedDeparture }} TO {{ selectedTravelling }}</h1>
-            <p class="paragraph">Distance: {{ distance }} km</p>
-            <div v-if="arrivalTime && selectedDate">
-              <p class="paragraph">
-                Departure Date: {{ formattedDepartureDate }} <br />
-                Estimated Arrival Time: {{ arrivalTime }} <br />
-                Estimated Arrival Date: {{ formattedArrivalDate }}
-              </p>
-            </div>
-            <p class="paragraph"> Number of people travelling: {{ numberOfPeople }}</p>
-            <p class="paragraph">Price: R {{ priceInZAR }}</p>
-            <p v-if="isDivVisible && returningDate" class="paragraph">Returning Date: {{ formattedReturningDate }}</p>
-
-            <button class="btn" data-bs-toggle="modal" data-bs-target="#BookTicket" type="button">BOOK A TICKET</button>
-
-            <div class="modal fade" id="BookTicket" tabindex="-1" aria-labelledby="BookTicketLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="BookTicketLabel">Edit Your Booking</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="modal-departure">Departing From</label>
-                      <select id="modal-departure" v-model="selectedDeparture" class="form-control">
-                        <option
-                          v-for="city in departure"
-                          :key="city.departureID"
-                          :value="city.departureCity"
-                        >
-                          {{ city.departureCity }}
-                        </option>
-                      </select>
+                  <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn" @click="confirmBooking">Proceed to checkout</button>
+                  <div v-if="showMessage" class="overlay">
+                    <div class="spinner-container">
+                      <div class="checkout-icon-container">
+                        <i class="bi bi-check-square-fill"></i>
+                      </div>
+                      <p>Thank you for your booking!</p>
                     </div>
-                    <div class="form-group">
-                      <label for="modal-travelling">Travelling To</label>
-                      <select id="modal-travelling" v-model="selectedTravelling" class="form-control">
-                        <option
-                          v-for="town in filteredTravelling"
-                          :key="town.travellingID"
-                          :value="town.travellingCity"
-                        >
-                          {{ town.travellingCity }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="modal-people">Number of People</label>
-                      <select id="modal-people" v-model="numberOfPeople" class="form-control">
-                        <option v-for="num in [1, 2, 3, 4, 5]" :key="num" :value="num">{{ num }}</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="modal-date">Departure Date</label>
-                      <input type="date" id="modal-date" v-model="selectedDate" class="form-control" :min="todayDate" />
-                    </div>
-                    <div class="form-group">
-                      <label for="modal-time">Departure Time</label>
-                      <input type="time" id="modal-time" v-model="departureTime" class="form-control" :min="minTime" />
-                    </div>
-                    <div v-if="isDivVisible" class="form-group">
-                      <label for="modal-returning-date">Returning Date</label>
-                      <input type="date" id="modal-returning-date" v-model="returningDate" class="form-control" :min="todayDate" />
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn " @click="confirmBooking">Proceed to checkout</button>
-                    <div v-if="showMessage" class="overlay">
-                <div class="spinner-container">
-                  <!-- Checkout Icon -->
-                  <div class="checkout-icon-container">
-                      <i class="bi bi-check-square-fill"></i>
-                  </div>
-                  <p>Thank you for your booking!</p>
-                </div>
-                </div>
                   </div>
                 </div>
               </div>
@@ -359,11 +167,11 @@
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
+
 <script>
 import { mapState } from "vuex";
 import SpinnerComp from "@/components/SpinnerComp.vue";
@@ -373,10 +181,7 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-=======
       showMessage: false,
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
       numberOfPeople: 1,  
       ratePerKm: 2,
       priceInZAR: 0,
@@ -397,11 +202,7 @@ export default {
   computed: {
     watch: {
     numberOfPeople() {
-<<<<<<< HEAD
-      this.calculatePrice(); // Watch the number of people and recalculate price
-=======
       this.calculatePrice();
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
     },
   },
     formattedDepartureDate() {
@@ -433,87 +234,48 @@ export default {
     },
   },
   methods: {
-    confirmBooking() {
-<<<<<<< HEAD
-      const bookingData = {
-        selectedDeparture: this.selectedDeparture,
-        selectedTravelling: this.selectedTravelling,
-        numberOfPeople: this.numberOfPeople,
-        selectedDate: this.selectedDate,
-        departureTime: this.departureTime,
-        returningDate: this.returningDate,
-        distance: this.distance,
-        priceInZAR: this.priceInZAR,
-        arrivalTime: this.arrivalTime,
-        arrivalDate: this.arrivalDate
-      };
+  confirmBooking() {
+    this.showMessage = true;
+    setTimeout(() => {
+      this.showMessage = false;
+    }, 5000); 
+  },
+  validateDate() {
+    if (this.selectedDate && this.selectedDate < this.todayDate) {
+      alert('Selected date cannot be in the past.');
+      this.selectedDate = this.todayDate;
+    }
+    
+    if (this.returningDate && this.returningDate < this.todayDate) {
+      alert('Returning date cannot be in the past.');
+      this.returningDate = this.todayDate;
+    }
 
-      // Dispatch the Vuex action to save the booking data
-      this.$store.dispatch('confirmBooking', bookingData);
-      this.$router.push({name: 'bookingSummary'})
-=======
-      this.showMessage = true;
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 5000); 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-    },
-    validateDate() {
-      if (this.selectedDate && this.selectedDate < this.todayDate) {
-        alert('Selected date cannot be in the past.');
-<<<<<<< HEAD
-        this.selectedDate = this.todayDate; // Reset to today's date or previous valid date
-      }
-      if (this.returningDate && this.returningDate < this.todayDate) {
-        alert('Returning date cannot be in the past.');
-        this.returningDate = this.todayDate; // Reset to today's date or previous valid date
-=======
-        this.selectedDate = this.todayDate;
-      }
-      if (this.returningDate && this.returningDate < this.todayDate) {
-        alert('Returning date cannot be in the past.');
-        this.returningDate = this.todayDate; 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-      }
-    },
-    validateTime() {
-      if (this.selectedDate === this.todayDate && this.departureTime && this.departureTime < this.minTime) {
-        alert('Selected time cannot be in the past.');
-<<<<<<< HEAD
-        this.departureTime = this.minTime; // Reset to current time or previous valid time
-=======
-        this.departureTime = this.minTime;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-      }
-    },
-    displayResults(){
-      if (!this.selectedDate || !this.departureTime) {
-        alert('Please select both date and time.');
-        return;
-      }
-            this.calculateDistance()
-            this.calculatePrice();
-            this.calculateDepartureTime();
-            this.isResultsDiplayed = true
-        },
-
-        calculateDepartureTime() {
+    if (this.selectedDate && this.returningDate && this.returningDate <= this.selectedDate) {
+      alert('Returning date must be after the departure date.');
+      const departureDate = new Date(this.selectedDate);
+      departureDate.setDate(departureDate.getDate() + 1); // Set returningDate to one day after selectedDate
+      this.returningDate = departureDate.toISOString().split('T')[0];
+    }
+  },
+  validateTime() {
+    if (this.selectedDate === this.todayDate && this.departureTime && this.departureTime < this.minTime) {
+      alert('Selected time cannot be in the past.');
+      this.departureTime = this.minTime;
+    }
+  },
+  displayResults(){
+    if (!this.selectedDate || !this.departureTime) {
+      alert('Please select both date and time.');
+      return;
+    }
+    this.calculateDistance();
+    this.calculatePrice();
+    this.calculateDepartureTime();
+    this.isResultsDiplayed = true;
+  },
+  calculateDepartureTime() {
     if (this.departureTime && this.distance) {
-<<<<<<< HEAD
-      // Convert the departure time (input: HH:MM) to a Date object
-      const [hours, minutes] = this.departureTime.split(':').map(Number);
-      const departureDate = new Date(this.selectedDate); // Use selected date from input
-      departureDate.setHours(hours, minutes, 0);
-
-      // Calculate travel time in hours
-      const travelTimeInHours = this.distance / this.speed;
-      const travelTimeInMilliseconds = travelTimeInHours * 60 * 60 * 1000;
-
-      // Add travel time to the departure date
-      const arrivalDate = new Date(departureDate.getTime() + travelTimeInMilliseconds);
-
-      // Check if the distance is more than 1200 km, then add one day to the arrival date
-=======
       const [hours, minutes] = this.departureTime.split(':').map(Number);
       const departureDate = new Date(this.selectedDate);
       departureDate.setHours(hours, minutes, 0);
@@ -523,23 +285,13 @@ export default {
 
       const arrivalDate = new Date(departureDate.getTime() + travelTimeInMilliseconds);
 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
       if (this.distance > 1200) {
         arrivalDate.setDate(arrivalDate.getDate() + 1);
       }
 
-<<<<<<< HEAD
-      // Check if the arrival time passes midnight (00:00), add an extra day
       if (arrivalDate.getHours() < departureDate.getHours() || arrivalDate.getDate() > departureDate.getDate()) {
         arrivalDate.setDate(arrivalDate.getDate() + 1);
       }
-
-      // Set arrival time and date
-=======
-      if (arrivalDate.getHours() < departureDate.getHours() || arrivalDate.getDate() > departureDate.getDate()) {
-        arrivalDate.setDate(arrivalDate.getDate() + 1);
-      }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
       this.arrivalTime = arrivalDate.toTimeString().split(' ')[0].substring(0, 5); // HH:MM format
       this.arrivalDate = arrivalDate.toISOString().split('T')[0]; // YYYY-MM-DD format
 
@@ -551,85 +303,55 @@ export default {
     }
   }, 
   calculatePrice() {
-      if (this.distance && this.numberOfPeople) {
-<<<<<<< HEAD
-        // Price per person
-        const pricePerPerson = this.distance * this.ratePerKm;
-        // Multiply by the number of people
-=======
-        const pricePerPerson = this.distance * this.ratePerKm;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-        this.priceInZAR = (pricePerPerson * this.numberOfPeople).toFixed(2);
-      }
-    },
-    calculateDistance() {
-  const cityFromData = this.departure.find(city => city.departureCity === this.selectedDeparture);
-  const cityToData = this.travelling.find(city => city.travellingCity === this.selectedTravelling);
-
-  if (!cityFromData || !cityToData) {
-    console.error('Selected city not found in data. Please check the city list.');
-<<<<<<< HEAD
-    return; // Exit the function early if either city is not found
-=======
-    return; 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-  }
-
-  const distance = this.haversine(
-    cityFromData.latitude,
-    cityFromData.longitude,
-    cityToData.latitude,
-    cityToData.longitude
-  );
-
-  this.distance = Math.round(distance);
-  this.calculatePrice();
-},
-        haversine(lat1, lon1, lat2, lon2) {
-            const toRadians = (degrees) =>  degrees * (Math.PI / 180);
-<<<<<<< HEAD
-            // Radius of the Earth in kilometers
-            const R = 6371.0;
-            // Convert latitude and longitude from degrees to radians
-=======
-            const R = 6371.0;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-            const lat1Rad = toRadians(lat1);
-            const lon1Rad = toRadians(lon1);
-            const lat2Rad = toRadians(lat2);
-            const lon2Rad = toRadians(lon2);
-<<<<<<< HEAD
-            // Differences in coordinates
-            const dLat = lat2Rad - lat1Rad;
-            const dLon = lon2Rad - lon1Rad;
-            // Haversine formula
-            const a = Math.sin(dLat / 2) ** 2 +
-                      Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            // Distance in kilometers
-=======
-            const dLat = lat2Rad - lat1Rad;
-            const dLon = lon2Rad - lon1Rad;
-            const a = Math.sin(dLat / 2) ** 2 +
-                      Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
-            return R * c;
-           
-
-            
-        },
-
-    toggleDiv() {
-      this.isDivVisible = !this.isDivVisible;
-    },
-    async getDeparture() {
-      await this.$store.dispatch("fetchDeparture");
-    },
-    async getTravelling() {
-      await this.$store.dispatch("fetchTravelling");
-    },
+    if (this.distance && this.numberOfPeople) {
+      const pricePerPerson = this.distance * this.ratePerKm;
+      this.priceInZAR = (pricePerPerson * this.numberOfPeople).toFixed(2);
+    }
   },
+  calculateDistance() {
+    const cityFromData = this.departure.find(city => city.departureCity === this.selectedDeparture);
+    const cityToData = this.travelling.find(city => city.travellingCity === this.selectedTravelling);
+
+    if (!cityFromData || !cityToData) {
+      console.error('Selected city not found in data. Please check the city list.');
+      return; 
+    }
+
+    const distance = this.haversine(
+      cityFromData.latitude,
+      cityFromData.longitude,
+      cityToData.latitude,
+      cityToData.longitude
+    );
+
+    this.distance = Math.round(distance);
+    this.calculatePrice();
+  },
+  haversine(lat1, lon1, lat2, lon2) {
+    const toRadians = (degrees) =>  degrees * (Math.PI / 180);
+    const R = 6371.0;
+    const lat1Rad = toRadians(lat1);
+    const lon1Rad = toRadians(lon1);
+    const lat2Rad = toRadians(lat2);
+    const lon2Rad = toRadians(lon2);
+    const dLat = lat2Rad - lat1Rad;
+    const dLon = lon2Rad - lon1Rad;
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  },
+  toggleDiv() {
+    this.isDivVisible = !this.isDivVisible;
+  },
+  async getDeparture() {
+    await this.$store.dispatch("fetchDeparture");
+  },
+  async getTravelling() {
+    await this.$store.dispatch("fetchTravelling");
+  },
+},
+
   mounted() {
     this.getDeparture();
     this.getTravelling();
@@ -638,33 +360,30 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-.modal-content{
-  background-color: #001f31;
-}
-.paragraph{
-  color: white;
-  font-size: 1rem;
-}
-#select{
-  padding-top: 2rem;
-}
-.booking-result{
-  border: 2px solid #7ddff1; 
-  width: 300px;
-  background-image: linear-gradient(to right, #7ddff1, #001f31, #7ddff1,#001f31);
-  margin-inline-start: 40rem;
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; 
 }
 
-label {
-  color: #7ddff1;
+.form {
+  flex: 1;
 }
-.date {
-  width: 480px;
+
+.result-section {
+  flex: 1; 
 }
-.dropdown {
-  width: 480px;
-=======
+
+
+.booking-results-grid {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+}
+
+.hidden-div {
+  display: none;
+}
 
 .overlay {
   position: fixed;
@@ -702,7 +421,7 @@ label {
   color: #28a745; 
 }
 
-p {
+p{
   font-size: 1.25rem;
   color: #343a40;
   margin-top: 10px;
@@ -719,10 +438,11 @@ p {
 }
 .booking-result {
   border: 2px solid #7ddff1;
-  width: 100%;
-  max-width: 300px;
+  width: 700px;
+  /* max-width: 300px; */
   background-image: linear-gradient(to right, #7ddff1, #001f31, #7ddff1, #001f31);
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
+  margin-top: 2rem;
 }
 form {
   padding: 2rem;
@@ -732,7 +452,6 @@ label {
 }
 .date, .dropdown {
   width: 100%;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 }
 option {
   background-color: #001f31;
@@ -740,7 +459,7 @@ option {
 .find {
   background-color: #7ddff1;
   color: #001f31;
-  margin-left: 10rem;
+  /* margin-left: 10rem; */
 }
 .return {
   background-color: transparent;
@@ -751,14 +470,8 @@ option {
   background-color: #7ddff1;
   color: #001f31;
 }
-<<<<<<< HEAD
-
-.ticket {
-  background-color: #001f31;
-=======
 .ticket {
   background-color: transparent;
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   padding-bottom: 3rem;
   color: white;
 }
@@ -768,20 +481,6 @@ h1 {
   text-shadow: 2px 2px 5px #7ddff1;
 }
 form {
-<<<<<<< HEAD
-  background-color: #001f31;
-  padding-top: 3rem;
-}
-.container-fluid {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  gap: 2rem;
-}
-button {
-  margin-bottom: 1.5rem;
-  width: 150px;
-=======
   background-color: transparent;
   padding-top: 3rem;
 }
@@ -789,20 +488,17 @@ button {
   margin-bottom: 1.5rem;
   width: 100%; 
   max-width: 150px; 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
   height: 3rem;
 }
 .container-fluid {
   background-color: #001f31;
-<<<<<<< HEAD
-=======
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 500px;
   gap: 2rem;
-  margin: 0 auto; 
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
+  /* margin: 0 auto;  */
+  padding: 1.2rem
 }
 :is(input, select) {
   height: 2rem;
@@ -811,10 +507,6 @@ button {
   border-left: 2px solid #7ddff1;
   color: white;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 .one-way {
   background-color: #7ddff1;
   color: #001f31;
@@ -822,15 +514,6 @@ button {
 }
 #people {
   color: white;
-<<<<<<< HEAD
-  width: 480px;
-}
-.submit-button{
-  background-image: linear-gradient(to right,#001f31, #7ddff1, #001f31);
-  border: 2px solid #7ddff1;
-  color: white;
-}
-=======
 }
 .submit-button {
   background-image: linear-gradient(to right, #001f31, #7ddff1, #001f31);
@@ -909,5 +592,4 @@ button {
     height: 2rem; 
   }
 }
->>>>>>> 3bcef4e1e7949a33fbb97fa72bce0dc4eab5a571
 </style>
